@@ -1,0 +1,30 @@
+#encoding: utf-8
+<% provide(:title, 'Lista de solicitudes de subsidio para realización de publicación eventual de teatro independiente') %>
+<h1>Lista de solicitudes de subsidio para realización de publicación eventual de teatro independiente</h1></br>
+
+<table class="table table-striped">
+  <tr>
+    <th>Fecha</th>
+    <th>Número de Cuit del solicitante</th>
+    <th>Estado</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <%= content_tag_for(:tr, @tramites) do |tramite| %>
+    <% if PubEventual.find(tramite.tramitable_id).estado == 2 %>
+      <td><%= I18n.l(PubEventual.find(tramite.tramitable_id).created_at) %></td>
+      <td><%= PubEventual.find(tramite.tramitable_id).num_cuit %></td>
+      <td><%= PubEventual::ESTADOS.key(PubEventual.find(tramite.tramitable_id).estado) %></td>
+
+      <td><%= link_to t("scaffoldi18n.show"), pub_eventual_path(tramite.tramitable_id) %></td>
+      <td><%= link_to t("scaffoldi18n.edit"), edit_pub_eventual_path(tramite.tramitable_id) %></td>
+      <td><%= link_to t("scaffoldi18n.destroy"), pub_eventual_path(tramite.tramitable_id), :data => {confirm: t("scaffoldi18n.are_you_sure?")}, method: :delete %></td>
+    <% else %>    
+    <% end %>
+  <% end %>
+</table>
+<%= link_to t('Nueva solicitud'), new_pub_eventual_path, class: "btn btn-large btn-small" %>
+</br>
+</br>

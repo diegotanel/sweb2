@@ -1,0 +1,35 @@
+#encoding: utf-8
+<% provide(:title, 'Lista de solicitudes de subsidio para beca para completar Estudios Académicos') %>
+<h1>Lista de solicitudes de subsidio para beca para completar Estudios Académicos</h1></br>
+
+<table class="table table-striped">
+  <tr>
+    <th>Fecha</th>
+    <th>Número de Cuit del solicitante</th>
+    <th>Estado</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <%= content_tag_for(:tr, @tramites) do |tramite| %>
+    <% if BecaEstudios.find(tramite.tramitable_id).estado == 2 %>
+      <td><%= I18n.l(BecaEstudios.find(tramite.tramitable_id).created_at) %></td>
+      <td><%= BecaEstudios.find(tramite.tramitable_id).num_cuit %></td>
+      <td><%= BecaEstudios::ESTADOS.key(BecaEstudios.find(tramite.tramitable_id).estado) %></td>
+
+      <td><%= link_to t("scaffoldi18n.show"), beca_estudios_path(tramite.tramitable_id) %></td>
+      <td><%= link_to t("scaffoldi18n.edit"), edit_beca_estudios_path(tramite.tramitable_id) %></td>
+      <td><%= link_to t("scaffoldi18n.destroy"), beca_estudios_path(tramite.tramitable_id), :data => {confirm: t("scaffoldi18n.are_you_sure?")}, method: :delete %></td>
+    <% else %>
+      <td><%= I18n.l(BecaEstudios.find(tramite.tramitable_id).created_at) %></td>
+      <td><%= BecaEstudios.find(tramite.tramitable_id).num_cuit %></td>
+      <td><%= BecaEstudios::ESTADOS.key(BecaEstudios.find(tramite.tramitable_id).estado) %></td>
+
+      <td><%= link_to t("scaffoldi18n.show"), beca_estudios_path(tramite.tramitable_id) %></td>
+    <% end %>    
+  <% end %>
+</table>
+<%= link_to t('Nueva solicitud'), new_beca_estudios_path, class: "btn btn-large btn-small" %>
+</br>
+</br>

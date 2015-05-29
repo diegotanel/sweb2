@@ -1,0 +1,29 @@
+#encoding: utf-8
+<% provide(:title, 'Datos de solicitud de subsidio para beca de estudio o perfeccionamiento - Rubro Artístico Técnico') %>
+<h1>Datos de solicitud de subsidio para beca de estudio o perfeccionamiento - Rubro Artístico Técnico</h1>
+
+</br>
+<p>
+  <b>Fecha de Solicitud:</b>
+  <%= I18n.l(@beca_artis.created_at) %>
+</p>
+
+<p>
+  <b>Nombre del solicitante:</b>
+  <%= @beca_artis.nombre %>
+</p>
+
+<p>
+  <b>Apellido del solicitante:</b>
+  <%= @beca_artis.apellido %>
+</p>
+
+<p>
+  <b>Número de cuit del solicitante:</b>
+  <%= @beca_artis.num_cuit %>
+</p>
+
+<p>
+  <b>Detalle de la solicitud:</b>
+  <%= @beca_artis.detalle %>
+</p>

@@ -1,0 +1,32 @@
+# Be sure to restart your server when you modify this file.
+
+# Add new inflection rules using the following format. Inflections
+# are locale specific, and you may define rules for as many different
+# locales as you wish. All of these examples are active by default:
+# ActiveSupport::Inflector.inflections(:en) do |inflect|
+#   inflect.plural /^(ox)$/i, '\1en'
+#   inflect.singular /^(ox)en/i, '\1'
+#   inflect.irregular 'person', 'people'
+#   inflect.uncountable %w( fish sheep )
+# end
+
+# These inflection rules are supported but not enabled by default:
+# ActiveSupport::Inflector.inflections(:en) do |inflect|
+#   inflect.acronym 'RESTful'
+# end
+
+ActiveSupport::Inflector.inflections do |inflect|
+	inflect.irregular 'asist_tec', 'asist_tecs'
+	inflect.irregular 'pub_eventual', 'pub_eventuales'
+	inflect.irregular 'pub_periodica', 'pub_periodicas'
+	inflect.irregular 'realiza_evento', 'realiza_eventos'
+	inflect.irregular 'pro_inves', 'pros_inves'
+	inflect.irregular 'beca_artis', 'becas_artis'
+	inflect.irregular 'beca_gestion', 'becas_gestion'
+	inflect.irregular 'beca_estudios', 'becas_estudios'
+	inflect.irregular 'error', 'errores'
+	inflect.irregular 'solicitud_soporte', 'solicitudes_soporte'
+	inflect.irregular 'solicitud', 'solicitudes'
+	inflect.irregular 'tramite', 'tramites'
+	inflect.irregular 'consulta_estado', 'consultas_estado'
+end

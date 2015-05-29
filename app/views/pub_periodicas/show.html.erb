@@ -1,0 +1,29 @@
+#encoding: utf-8
+<% provide(:title, 'Datos de solicitud de subsidio para realización de publicación periodica de teatro independiente') %>
+<h1>Datos de solicitud de subsidio para realización de publicación periodica de teatro independiente</h1>
+
+</br>
+<p>
+  <b>Fecha de Solicitud:</b>
+  <%= I18n.l(@pub_periodica.created_at) %>
+</p>
+
+<p>
+  <b>Nombre del solicitante:</b>
+  <%= @pub_periodica.nombre %>
+</p>
+
+<p>
+  <b>Apellido del solicitante:</b>
+  <%= @pub_periodica.apellido %>
+</p>
+
+<p>
+  <b>Número de cuit del solicitante:</b>
+  <%= @pub_periodica.num_cuit %>
+</p>
+
+<p>
+  <b>Detalle de la solicitud:</b>
+  <%= @pub_periodica.detalle %>
+</p>

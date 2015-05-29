@@ -1,0 +1,29 @@
+#encoding: utf-8
+<% provide(:title, 'Datos de solicitud de subsidio para asistencia técnica para teatro independiente') %>
+<h1>Datos de solicitud de subsidio para asistencia técnica para teatro independiente</h1>
+
+</br>
+<p>
+  <b>Fecha de Solicitud:</b>
+  <%= I18n.l(@asist_tec.created_at) %>
+</p>
+
+<p>
+  <b>Nombre del solicitante:</b>
+  <%= @asist_tec.nombre %>
+</p>
+
+<p>
+  <b>Apellido del solicitante:</b>
+  <%= @asist_tec.apellido %>
+</p>
+
+<p>
+  <b>Número de cuit del solicitante:</b>
+  <%= @asist_tec.num_cuit %>
+</p>
+
+<p>
+  <b>Detalle de la solicitud:</b>
+  <%= @asist_tec.detalle %>
+</p>

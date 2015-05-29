@@ -1,0 +1,29 @@
+#encoding: utf-8
+<% provide(:title, 'Datos de solicitud de subsidio para realización de evento de teatro independiente') %>
+<h1>Datos de solicitud de subsidio para realización de evento de teatro independiente</h1>
+
+</br>
+<p>
+  <b>Fecha de Solicitud:</b>
+  <%= I18n.l(@realiza_evento.created_at) %>
+</p>
+
+<p>
+  <b>Nombre del solicitante:</b>
+  <%= @realiza_evento.nombre %>
+</p>
+
+<p>
+  <b>Apellido del solicitante:</b>
+  <%= @realiza_evento.apellido %>
+</p>
+
+<p>
+  <b>Número de cuit del solicitante:</b>
+  <%= @realiza_evento.num_cuit %>
+</p>
+
+<p>
+  <b>Detalle de la solicitud:</b>
+  <%= @realiza_evento.detalle %>
+</p>

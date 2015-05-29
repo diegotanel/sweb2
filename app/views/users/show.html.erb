@@ -1,0 +1,10 @@
+<% provide(:title, "Cuenta " + @user.name + ' ' + @user.last_name) %>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h1>
+        <%= current_user.name %> <%= current_user.last_name %> <%= current_user.email %>
+      </h1>
+    </section>
+  </aside>
+</div>

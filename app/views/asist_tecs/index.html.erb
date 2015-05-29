@@ -1,0 +1,31 @@
+#encoding: utf-8
+<% provide(:title, 'Lista de solicitudes de subsidio para asistencia técnica para teatro independiente') %>
+<h1>Lista de solicitudes de subsidio para asistencia técnica para teatro independiente</h1></br>
+
+<table class="table table-striped">
+  <tr>
+    <th>Fecha</th>
+    <th></th>
+    <th>Número de Cuit del solicitante</th>
+    <th>Estado</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <%= content_tag_for(:tr, @tramites) do |tramite| %>
+    <% if AsistTec.find(tramite.tramitable_id).estado == 2 %>
+      <td><%= I18n.l(AsistTec.find(tramite.tramitable_id).created_at) %></td>
+      <td><%= AsistTec.find(tramite.tramitable_id).num_cuit %></td>
+      <td><%= AsistTec::ESTADOS.key(AsistTec.find(tramite.tramitable_id).estado) %></td>
+
+      <td><%= link_to t("scaffoldi18n.show"), asist_tec_path(tramite.tramitable_id) %></td>
+      <td><%= link_to t("scaffoldi18n.edit"), edit_asist_tec_path(tramite.tramitable_id) %></td>
+      <td><%= link_to "Enviar solicitud", enviar_asist_tec_path(tramite.tramitable_id) %></td>
+      <td><%= link_to t("scaffoldi18n.destroy"), asist_tec_path(tramite.tramitable_id), :data => {confirm: t("scaffoldi18n.are_you_sure?")}, method: :delete %></td>
+    <% end %>
+  <% end %>
+</table>
+<%= link_to t('Nueva solicitud'), new_asist_tec_path, class: "btn btn-large btn-small" %>
+</br>
+</br>

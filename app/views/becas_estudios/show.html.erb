@@ -1,0 +1,29 @@
+#encoding: utf-8
+<% provide(:title, 'Datos de solicitud de subsidio para beca para completar Estudios Académicos') %>
+<h1>Datos de solicitud de subsidio para beca para completar Estudios Académicos</h1>
+
+</br>
+<p>
+  <b>Fecha de Solicitud:</b>
+  <%= I18n.l(@beca_estudios.created_at) %>
+</p>
+
+<p>
+  <b>Nombre del solicitante:</b>
+  <%= @beca_estudios.nombre %>
+</p>
+
+<p>
+  <b>Apellido del solicitante:</b>
+  <%= @beca_estudios.apellido %>
+</p>
+
+<p>
+  <b>Número de cuit del solicitante:</b>
+  <%= @beca_estudios.num_cuit %>
+</p>
+
+<p>
+  <b>Detalle de la solicitud:</b>
+  <%= @beca_estudios.detalle %>
+</p>

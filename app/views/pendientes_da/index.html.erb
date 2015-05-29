@@ -1,0 +1,44 @@
+#encoding: utf-8
+<% provide(:title, 'Solicitudes pendientes de recepcionar DA') %>
+<h1>Lista de solicitudes pendientes de recepcionar DA</h1></br>
+
+<%= search_form_for @h, url: { :action=>"index" } do |f| %>
+
+  <div class="field">
+    <%= f.label :tramitable_type_eq, "Tipo de tramite" %>
+    <%= f.text_field :tramitable_type_eq %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Buscar"%>
+  </div>
+<% end %>
+
+
+<% if @q.result %>
+  <table class="table table-striped">
+    <tr>
+      <th><%= sort_link @h, :created_at, "Fecha de creación" %></th>
+      <th>Nombre del solicitante</th>
+      <th>Apellido del solicitante</th>
+      <th>CUIT del solicitante</th>
+      <th>Tipo de solicitud</th>
+      <th></th>
+      <th></th>
+    </tr>
+
+    <%= content_tag_for(:tr, @h.result) do |tramite| %>
+      <% if tramite.tramitable_type.constantize.find(tramite.tramitable_id).estado = 2 %>
+        <td><%= I18n.l(tramite.created_at) %></td>
+        <td><%= tramite.tramitable_type.constantize.find(tramite.tramitable_id).nombre%></td>
+        <td><%= tramite.tramitable_type.constantize.find(tramite.tramitable_id).apellido %></td>
+        <td><%= tramite.tramitable_type.constantize.find(tramite.tramitable_id).num_cuit %></td>
+        <td><%= tramite.tramitable_type%></td>
+        <td><%= link_to "Editar", [:edit, tramite.tramitable_type.constantize.find(tramite.tramitable_id)]%></td>
+        <td><%= link_to "Ver", [tramite.tramitable_type.constantize.find(tramite.tramitable_id)] %></td>
+      <% end %>
+    <% end %>
+  </table>
+
+<p>Cantidad de registros: <%="#{@h.result.count}" %></p>
+<% end %>

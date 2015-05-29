@@ -1,0 +1,28 @@
+es-AR:
+  scaffoldi18n:
+    edit: Editar
+    show: Mostrar
+    destroy: Eliminar
+    new: Alta
+    back: Atrás
+    are_you_sure?: "¿Esta seguro?"
+  time:
+    formats:
+      default: ! '%d/%m/%Y %H:%M'
+      short: ! '%d/%m/%Y'
+      con_seg: ! '%d/%m/%Y %H:%M:%S'
+  activerecord:
+    attributes:
+        user: Usuario
+        created_at: Fecha de creación
+        deleted_at: Fecha de baja
+    models:
+      asist_tec: Subsidio para asistencia técnica para teatro independiente
+      beca_artis: Beca de estudio o perfeccionamiento - Rubro Artístico Técnico
+      beca_estudios: Beca para completar Estudios Académicos
+      beca_gestion: Beca de estudio o perfeccionamiento - Rubro Gestión y Producción teatral
+      pro_inves: Subsidio para proyecto de investigación
+      pub_eventual: Subsidio para realización de publicación eventual de teatro independiente
+      pub_periodica: Subsidio para realización de publicación periodica de teatro independiente
+      realiza_evento: Subsidio para realización de evento para teatro independiente
+

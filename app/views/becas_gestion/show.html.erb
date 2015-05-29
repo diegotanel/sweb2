@@ -1,0 +1,29 @@
+#encoding: utf-8
+<% provide(:title, 'Datos de solicitud de subsidio para beca de estudio o perfeccionamiento - Rubro Gestión y Producción teatral') %>
+<h1>Datos de solicitud de subsidio para beca de estudio o perfeccionamiento - Rubro Gestión y Producción teatral</h1>
+
+</br>
+<p>
+  <b>Fecha de Solicitud:</b>
+  <%= I18n.l(@beca_gestion.created_at) %>
+</p>
+
+<p>
+  <b>Nombre del solicitante:</b>
+  <%= @beca_gestion.nombre %>
+</p>
+
+<p>
+  <b>Apellido del solicitante:</b>
+  <%= @beca_gestion.apellido %>
+</p>
+
+<p>
+  <b>Número de cuit del solicitante:</b>
+  <%= @beca_gestion.num_cuit %>
+</p>
+
+<p>
+  <b>Detalle de la solicitud:</b>
+  <%= @beca_gestion.detalle %>
+</p>

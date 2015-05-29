@@ -1,0 +1,25 @@
+#encoding: utf-8
+<% provide(:title, 'Formulario de solicitud de beca de estudio o perfeccionamiento - Rubro Artístico Técnico') %>
+<h1>Formulario de solicitud de beca de estudio o perfeccionamiento - Rubro Artístico Técnico</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for @beca_artis do |f| %>
+      <%= render 'shared/error_messages', :object => f.object %>
+      <%= f.label :nombre, "Nombre" %>
+      <%= f.text_field :nombre %>
+
+      <%= f.label :apellido, "Apellido" %>
+      <%= f.text_field :apellido %>
+
+      <%= f.label :num_cuit, "Número de Cuit" %>
+      <%= f.text_field :num_cuit %>
+
+      <%= f.label :detalle, "Detalle de la solicitud" %>
+      <%= f.text_area :detalle %>
+      </br>
+
+      <%= f.submit "Confirmar", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>
