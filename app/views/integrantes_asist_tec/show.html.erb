@@ -1,0 +1,48 @@
+#encoding: utf-8
+<% provide(:title, 'Datos de formulario para integrante del grupo para Asistencia Técnica') %>
+<h1>Datos de formulario para integrante del grupo para Asistencia Técnica</h1>
+
+</br>
+<p>
+  <b>Nombre:</b>
+  <%= @integrante.nombre %>
+</p>
+
+<p>
+  <b>Apellido:</b>
+  <%= @integrante.apellido %>
+</p>
+
+<p>
+  <b>Número de DNI:</b>
+  <%= @integrante.dni %>
+</p>
+
+<p>
+  <b>Fecha de nacimiento:</b>
+  <%= I18n.l(@integrante.fecha_nacimiento) %>
+</p>
+
+<p>
+  <b>Domicilio:</b>
+  <%= @integrante.domicilio %>
+</p>
+
+<p>
+  <b>Correo Electrónico:</b>
+  <%= @integrante.email %>
+</p>
+
+<p>
+  <b>Teléfono:</b>
+  <%= @integrante.telefono %>
+</p>
+
+<p>
+  <b>Rol:</b>
+  <%= @integrante.rol %>
+</p>
+
+</br>
+
+<%= link_to t('Volver'), asist_tec_integrantes_asist_tec_path %>

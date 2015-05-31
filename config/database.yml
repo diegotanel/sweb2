@@ -25,12 +25,21 @@ production:
   <<: *default
   database: db/production.sqlite3
 
+# inteatro_db_prueba:
+#   database: INTEATRODIG_PRUEBA
+#   adapter: sqlserver
+#   username: sa
+#   password: 300956Boxter
+#   host: 192.168.0.3
+#   port: 1433
+
+
 inteatro_db_prueba:
-  database: INTEATRODIG_PRUEBA
+  database: INTEATRODIG_ALTA_PF
   adapter: sqlserver
   username: sa
   password: 300956Boxter
-  host: 192.168.0.3
+  host: 192.168.0.110
   port: 1433
 
   #ActiveRecord::Base.establish_connection(:inteatro_db_prueba).connection

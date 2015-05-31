@@ -1,0 +1,50 @@
+#encoding: utf-8
+<% provide(:title, 'Integrantes del Grupo') %>
+<h1>Integrantes del Grupo</h1>
+
+
+<div id="artistas">
+<table class="table table-striped">
+  <tr>
+
+    <th>Nombre</th>
+    <th>Apellido</th>
+    <th>DNI</th>
+    <th>Fecha de nacimiento</th>
+    <th>Domicilio</th>
+    <th>Correo Electrónico</th>
+    <th>Teléfono</th>
+    <th>Rol</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <%= content_tag_for(:tr, @integrantes) do |integrante| %>
+
+    <td><%= integrante.nombre %></td>
+    <td><%= integrante.apellido %></td>
+    <td><%= integrante.dni %></td>
+    <td><%= I18n.l(integrante.fecha_nacimiento) %></td>
+    <td><%= integrante.domicilio %></td>
+    <td><%= integrante.email %></td>
+    <td><%= integrante.telefono %></td>
+    <td><%= integrante.rol %></td>
+
+
+    <td><%= link_to "Ver", asist_tec_integrante_asist_tec_path(@asist_tec, integrante) %></td>
+
+    <td><%= link_to "Modificar", edit_asist_tec_integrante_asist_tec_path(@asist_tec, integrante) %></td>
+
+    <td><%= link_to t("scaffoldi18n.destroy"), asist_tec_integrante_asist_tec_path(@asist_tec, integrante), :data => {confirm: t("scaffoldi18n.are_you_sure?")}, method: :delete %></td>
+    
+  <% end %>
+</table>
+<%= link_to "Nuevo integrante", new_asist_tec_integrante_asist_tec_path(@asist_tec), class: "btn btn-medium btn-primary" %>
+
+</br>
+</br>
+<%= link_to t('Volver'), asist_tecs_path %>
+
+</div>

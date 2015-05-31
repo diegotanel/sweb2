@@ -1,0 +1,40 @@
+#encoding: utf-8
+<% provide(:title, 'Formulario para integrante del grupo para Asistencia Técnica') %>
+<h1>Formulario para integrante del grupo para Asistencia Técnica</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for([@asist_tec, @integrante]) do |f| %>
+      <%= render 'shared/error_messages', :object => f.object %>
+      <%= f.label :nombre, "Nombre" %>
+      <%= f.text_field :nombre %>
+
+      <%= f.label :apellido, "Apellido" %>
+      <%= f.text_field :apellido %>
+
+      <%= f.label :dni, "Número de DNI" %>
+      <%= f.text_field :dni %>
+
+      <%= f.label :fecha_nacimiento, "Fecha de nacimiento" %>
+      <%= f.date_select :fecha_nacimiento, start_year: 1920, end_year: 2004 ,order: [:day, :month, :year], :include_blank => true %>
+
+      <%= f.label :domicilio, "Domicilio" %>
+      <%= f.text_field :domicilio %>
+
+      <%= f.label :email, "Correo Electrónico" %>
+      <%= f.text_field :email %>
+
+      <%= f.label :telefono, "Teléfono" %>
+      <%= f.text_field :telefono %>
+
+      <%= f.label :rol, "Rol" %>
+      <%= f.text_field :rol %>
+      </br>
+
+      <%= f.submit "Confirmar", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>
+</br>
+</br>
+<%= link_to t('Volver'), asist_tec_integrantes_asist_tec_path %>

@@ -4,26 +4,75 @@
 
 </br>
 <p>
-  <b>Fecha de Solicitud:</b>
-  <%= I18n.l(@asist_tec.created_at) %>
+  <b>Año de inicio:</b>
+  <%= I18n.l(@asist_tec.anio_inicio) %>
 </p>
 
 <p>
-  <b>Nombre del solicitante:</b>
+  <b>Nombre del grupo:</b>
+  <%= @asist_tec.nombre_grupo %>
+</p>
+
+<p>
+  <b>Número de registro:</b>
+  <%= @asist_tec.num_registro %>
+</p>
+
+<p>
+  <b>Nombre del responsable:</b>
   <%= @asist_tec.nombre %>
 </p>
 
 <p>
-  <b>Apellido del solicitante:</b>
+  <b>Apellido del responsable:</b>
   <%= @asist_tec.apellido %>
 </p>
 
 <p>
-  <b>Número de cuit del solicitante:</b>
+  <b>Número de Cuit del responsable:</b>
   <%= @asist_tec.num_cuit %>
 </p>
 
 <p>
-  <b>Detalle de la solicitud:</b>
-  <%= @asist_tec.detalle %>
+  <b>Domicilio del responsable:</b>
+  <%= @asist_tec.domicilio %>
 </p>
+
+<p>
+  <b>Localidad del responsable:</b>
+  <%= @asist_tec.localidad %>
+</p>
+
+<p>
+  <b>Codigo Postal del responsable:</b>
+  <%= @asist_tec.codigo_postal %>
+</p>
+
+<p>
+  <b>Provincia del responsable:</b>
+  <%= @asist_tec.provincia %>
+</p>
+
+<p>
+  <b>Email del responsable:</b>
+  <%= @asist_tec.email %>
+</p>
+
+<p>
+  <b>Telefono del responsable:</b>
+  <%= @asist_tec.telefono %>
+</p>
+
+<p>
+  <b>Monto solicitado:</b>
+  <%= @asist_tec.monto_letra %>
+</p>
+
+<p>
+  <b>Monto solicitado (en números):</b>
+  <%= @asist_tec.monto_numero %>
+</p>
+
+</br>
+</br>
+<%= link_to t('Volver'), asist_tecs_path %>

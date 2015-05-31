@@ -1,0 +1,2 @@
+module IntegrantesAsistTecHelper
+end

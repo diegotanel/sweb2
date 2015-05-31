@@ -6,20 +6,54 @@
   <div class="span6 offset3">
     <%= form_for @asist_tec do |f| %>
       <%= render 'shared/error_messages', :object => f.object %>
-      <%= f.label :nombre, "Nombre" %>
-      <%= f.text_field :nombre %>
+      <%= f.label :nombre_grupo, "Nombre del grupo" %>
+      <%= f.text_field :nombre_grupo %>
 
-      <%= f.label :apellido, "Apellido" %>
-      <%= f.text_field :apellido %>
+      <%= f.label :anio_inicio, "Año de inicio" %>
+      <%= f.text_field :anio_inicio %>
 
-      <%= f.label :num_cuit, "Número de Cuit" %>
-      <%= f.text_field :num_cuit %>
+      <%= f.label :num_registro, "Nº de regitro" %>
+      <%= f.text_field :num_registro %>
 
-      <%= f.label :detalle, "Detalle de la solicitud" %>
-      <%= f.text_area :detalle %>
+      <%= f.label :nombre, "Nombre del responsable" %>
+      <%= f.text_field :nombre, :readonly => true %>
+
+      <%= f.label :apellido, "Apellido del responsable" %>
+      <%= f.text_field :apellido, :readonly => true %>
+
+      <%= f.label :num_cuit, "Nº de Cuit del responsable" %>
+      <%= f.text_field :num_cuit, :readonly => true %>
+
+      <%= f.label :domicilio, "Domicilio del responsable" %>
+      <%= f.text_field :domicilio, :readonly => true %>
+
+      <%= f.label :localidad, "Localidad del responsable" %>
+      <%= f.text_field :localidad, :readonly => true %>
+
+      <%= f.label :codigo_postal, "Codigo Postal del responsable" %>
+      <%= f.text_field :codigo_postal, :readonly => true %>
+
+      <%= f.label :provincia, "Provincia del responsable" %>
+      <%= f.text_field :provincia, :readonly => true %>
+
+      <%= f.label :email, "Correo Electrónico del responsable" %>
+      <%= f.text_field :email, :readonly => true %>
+
+      <%= f.label :telefono, "Telefono del responsable" %>
+      <%= f.text_field :telefono, :readonly => true %>
+
+      <p>Monto solicitado al Instituto Nacional del Teatro</p>
+
+      <%= f.label :monto_letra, "Son Pesos" %>
+      <%= f.text_field :monto_letra %>
+
+      <%= f.label :monto_numero, "$ (en números)" %>
+      <%= f.text_field :monto_numero %>
       </br>
-
-      <%= f.submit "Confirmar cambios", class: "btn btn-large btn-primary" %>
+      <%= f.submit "Confirmar cambios y abrir lista de integrantes del grupo", class: "btn btn-large btn-primary" %>
     <% end %>
   </div>
 </div>
+</br>
+</br>
+<%= link_to t('Volver'), asist_tecs_path %>

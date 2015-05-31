@@ -4,6 +4,20 @@ class AsistTecsController < ApplicationController
 
   def new
     @asist_tec = AsistTec.new
+    ActiveRecord::Base.establish_connection(:inteatro_db_prueba).connection
+    query = "select * from REGISDIG where cuil = 20299050883"
+    result = ActiveRecord::Base.connection.select_all(query)
+    resultado = result.to_hash[0]
+    @nombre_responsable = resultado["NOMBRE"]
+    @apellido_responsable = resultado["APELLIDO"]
+    @num_cuit_responsable = resultado["CUIL"]
+    @domicilio_responsable = resultado["DOMIPART"]
+    @localidad_responsable = resultado["LOCALIDAD"]
+    @provincia_responsable = resultado["PROVINCIA"]
+    @codigo_postal_responsable = resultado["COPOST"]
+    @email_responsable = resultado["EMAIL"]
+    @telefono_responsable = resultado["TELEPART"]
+    ActiveRecord::Base.establish_connection(:development).connection
   end
 
   def show
@@ -22,7 +36,7 @@ class AsistTecsController < ApplicationController
       @tramite.tramitable = @asist_tec
       if @tramite.save
         flash[:success] = "Solicitud correctamente creada"
-        redirect_to asist_tec_path(@asist_tec)
+        redirect_to asist_tec_integrantes_asist_tec_path(@asist_tec)
       end
     else
       render 'new'
@@ -38,7 +52,7 @@ class AsistTecsController < ApplicationController
     @asist_tec.saltear_validaciones_de_presencia = true
     if @asist_tec.update_attributes(asist_tec_params)
       flash[:success] = "Solicitud actualizada"
-      redirect_to asist_tec_path(@asist_tec)
+      redirect_to asist_tec_integrantes_asist_tec_path(@asist_tec)
     else
       render 'edit'
     end
@@ -64,6 +78,7 @@ class AsistTecsController < ApplicationController
 
   private
     def asist_tec_params
-      params.require(:asist_tec).permit(:nombre, :apellido, :num_cuit, :detalle)
+      params.require(:asist_tec).permit(:nombre_grupo, :nombre, :apellido, :num_cuit,
+       :domicilio, :provincia, :num_registro, :telefono, :email, :localidad, :monto_letra, :monto_numero, :codigo_postal, :anio_inicio)
     end
 end

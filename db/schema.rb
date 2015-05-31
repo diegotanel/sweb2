@@ -11,13 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150519181454) do
+ActiveRecord::Schema.define(version: 20150531191254) do
 
   create_table "asist_tecs", force: :cascade do |t|
-    t.string   "nombre",     null: false
-    t.string   "apellido",   null: false
-    t.string   "num_cuit",   null: false
-    t.text     "detalle",    null: false
+    t.string   "nombre_grupo",  null: false
+    t.date     "anio_inicio",   null: false
+    t.string   "num_registro",  null: false
+    t.string   "nombre",        null: false
+    t.string   "apellido",      null: false
+    t.string   "num_cuit",      null: false
+    t.string   "domicilio",     null: false
+    t.string   "codigo_postal", null: false
+    t.string   "localidad",     null: false
+    t.string   "provincia",     null: false
+    t.string   "email",         null: false
+    t.string   "telefono",      null: false
+    t.string   "monto_letra",   null: false
+    t.string   "monto_numero",  null: false
     t.integer  "estado"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -52,6 +62,22 @@ ActiveRecord::Schema.define(version: 20150519181454) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "integrantes_asist_tec", force: :cascade do |t|
+    t.string   "nombre",           null: false
+    t.string   "apellido",         null: false
+    t.string   "dni",              null: false
+    t.date     "fecha_nacimiento", null: false
+    t.string   "email",            null: false
+    t.string   "domicilio",        null: false
+    t.string   "telefono",         null: false
+    t.string   "rol",              null: false
+    t.integer  "asist_tec_id",     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "integrantes_asist_tec", ["asist_tec_id"], name: "index_integrantes_asist_tec_on_asist_tec_id"
 
   create_table "pros_inves", force: :cascade do |t|
     t.string   "nombre",     null: false

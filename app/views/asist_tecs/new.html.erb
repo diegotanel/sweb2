@@ -6,20 +6,55 @@
   <div class="span6 offset3">
     <%= form_for @asist_tec do |f| %>
       <%= render 'shared/error_messages', :object => f.object %>
-      <%= f.label :nombre, "Nombre" %>
-      <%= f.text_field :nombre %>
+      <%= f.label :nombre_grupo, "Nombre del grupo" %>
+      <%= f.text_field :nombre_grupo %>
 
-      <%= f.label :apellido, "Apellido" %>
-      <%= f.text_field :apellido %>
+      <%= f.label :anio_inicio, "Año de inicio" %>
+      <%= f.date_select :anio_inicio, start_year: 1950, end_year: 2014 ,order: [:day, :month, :year], :include_blank => true %>
 
-      <%= f.label :num_cuit, "Número de Cuit" %>
-      <%= f.text_field :num_cuit %>
+      <%= f.label :num_registro, "Nº de regitro" %>
+      <%= f.text_field :num_registro %>
 
-      <%= f.label :detalle, "Detalle de la solicitud" %>
-      <%= f.text_area :detalle %>
+      <%= f.label :nombre, "Nombre del responsable" %>
+      <%= f.text_field :nombre, :value => @nombre_responsable, :readonly => true %>
+
+      <%= f.label :apellido, "Apellido del responsable" %>
+      <%= f.text_field :apellido, :value => @apellido_responsable, :readonly => true %>
+
+      <%= f.label :num_cuit, "Nº de Cuit" %>
+      <%= f.text_field :num_cuit, :value => @num_cuit_responsable, :readonly => true %>
+
+      <%= f.label :domicilio, "Domicilio" %>
+      <%= f.text_field :domicilio, :value => @domicilio_responsable, :readonly => true %>
+
+      <%= f.label :localidad, "Localidad" %>
+      <%= f.text_field :localidad, :value => @localidad_responsable, :readonly => true %>
+
+      <%= f.label :codigo_postal, "Codigo Postal" %>
+      <%= f.text_field :codigo_postal, :value => @codigo_postal_responsable, :readonly => true %>
+
+      <%= f.label :provincia, "Provincia" %>
+      <%= f.text_field :provincia, :value => @provincia_responsable, :readonly => true %>
+
+      <%= f.label :email, "Correo Electrónico" %>
+      <%= f.text_field :email, :value => @email_responsable, :readonly => true %>
+
+      <%= f.label :telefono, "Telefono" %>
+      <%= f.text_field :telefono, :value => @telefono_responsable, :readonly => true %>
+
+      <p>Monto solicitado al Instituto Nacional del Teatro</p>
+
+      <%= f.label :monto_letra, "Son Pesos" %>
+      <%= f.text_field :monto_letra %>
+
+      <%= f.label :monto_numero, "$ (en números)" %>
+      <%= f.text_field :monto_numero %>
       </br>
 
-      <%= f.submit "Confirmar", class: "btn btn-large btn-primary" %>
+      <%= f.submit "Confirmar y abrir lista de integrantes del grupo", class: "btn btn-large btn-primary" %>
     <% end %>
   </div>
 </div>
+</br>
+</br>
+<%= link_to t('Volver'), asist_tecs_path %>

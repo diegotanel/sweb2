@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :users
   resources :realiza_eventos
   resources :asist_tecs do
+    resources :integrantes_asist_tec
     member do
       get :enviar
     end
