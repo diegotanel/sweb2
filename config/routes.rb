@@ -4,7 +4,12 @@ Rails.application.routes.draw do
   resources :users
   resources :realiza_eventos
   resources :asist_tecs do
-    resources :integrantes_asist_tec
+    resources :integrantes_asist_tec do
+      collection do
+        get :buscador
+        post :buscar_persona
+      end
+    end
     member do
       get :enviar
     end

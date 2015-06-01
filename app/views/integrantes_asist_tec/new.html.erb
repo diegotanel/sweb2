@@ -7,25 +7,25 @@
     <%= form_for([@asist_tec, @integrante]) do |f| %>
       <%= render 'shared/error_messages', :object => f.object %>
       <%= f.label :nombre, "Nombre" %>
-      <%= f.text_field :nombre %>
+      <%= f.text_field :nombre, :value => @nombre_integrante, :readonly => true %>
 
       <%= f.label :apellido, "Apellido" %>
-      <%= f.text_field :apellido %>
+      <%= f.text_field :apellido, :value => @apellido_integrante, :readonly => true %>
 
-      <%= f.label :dni, "Número de DNI" %>
-      <%= f.text_field :dni %>
+      <%= f.label :dni, "Número de Cuil" %>
+      <%= f.text_field :dni, :value => @num_cuit_integrante, :readonly => true %>
 
       <%= f.label :fecha_nacimiento, "Fecha de nacimiento" %>
-      <%= f.date_select :fecha_nacimiento, start_year: 1920, end_year: 2004 ,order: [:day, :month, :year], :include_blank => true %>
+      <%= f.date_select :fecha_nacimiento, start_year: 1920, end_year: 2004 ,order: [:day, :month, :year], :value => @fecha_nacimiento_integrante, :readonly => true %>
 
       <%= f.label :domicilio, "Domicilio" %>
-      <%= f.text_field :domicilio %>
+      <%= f.text_field :domicilio, :value => @domicilio_integrante, :readonly => true %>
 
       <%= f.label :email, "Correo Electrónico" %>
-      <%= f.text_field :email %>
+      <%= f.text_field :email, :value => @email_integrante, :readonly => true %>
 
       <%= f.label :telefono, "Teléfono" %>
-      <%= f.text_field :telefono %>
+      <%= f.text_field :telefono, :value => @telefono_integrante, :readonly => true %>
 
       <%= f.label :rol, "Rol" %>
       <%= f.text_field :rol %>
