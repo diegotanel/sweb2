@@ -4,20 +4,7 @@ class AsistTecsController < ApplicationController
 
   def new
     @asist_tec = AsistTec.new
-    ActiveRecord::Base.establish_connection(:inteatro_db_prueba).connection
-    query = "select * from REGISDIG where cuil = 20299050883"
-    result = ActiveRecord::Base.connection.select_all(query)
-    resultado = result.to_hash[0]
-    @nombre_responsable = resultado["NOMBRE"]
-    @apellido_responsable = resultado["APELLIDO"]
-    @num_cuit_responsable = resultado["CUIL"]
-    @domicilio_responsable = resultado["DOMIPART"]
-    @localidad_responsable = resultado["LOCALIDAD"]
-    @provincia_responsable = resultado["PROVINCIA"]
-    @codigo_postal_responsable = resultado["COPOST"]
-    @email_responsable = resultado["EMAIL"]
-    @telefono_responsable = resultado["TELEPART"]
-    ActiveRecord::Base.establish_connection(:development).connection
+    cargar_datos_asist_tec
   end
 
   def show
@@ -39,6 +26,7 @@ class AsistTecsController < ApplicationController
         redirect_to asist_tec_integrantes_asist_tec_path(@asist_tec)
       end
     else
+      cargar_datos_asist_tec
       render 'new'
     end
   end
@@ -81,4 +69,28 @@ class AsistTecsController < ApplicationController
       params.require(:asist_tec).permit(:nombre_grupo, :nombre, :apellido, :num_cuit,
        :domicilio, :provincia, :num_registro, :telefono, :email, :localidad, :monto_letra, :monto_numero, :codigo_postal, :anio_inicio)
     end
+
+    def cargar_datos_asist_tec
+      ActiveRecord::Base.establish_connection(:inteatro_db_prueba).connection
+      query = "select * from REGISDIG where cuil = 20299050883"
+      result = ActiveRecord::Base.connection.select_all(query)
+      resultado = result.to_hash[0]
+      query_prov = "select * from PROVIN where codigo = #{resultado["PROVINCIA"]}"
+      result_prov = ActiveRecord::Base.connection.select_all(query_prov)
+      resultado_prov = result_prov.to_hash[0]
+      query_loc = "select * from LOCALIDADES where CODLOC = #{resultado["LOCALIDAD"]}"
+      result_loc = ActiveRecord::Base.connection.select_all(query_loc)
+      resultado_loc = result_loc.to_hash[0]
+      @nombre_responsable = resultado["NOMBRE"].squish
+      @apellido_responsable = resultado["APELLIDO"]
+      @num_cuit_responsable = resultado["CUIL"].to_i.to_s
+      @domicilio_responsable = resultado["DOMIPART"]
+      @localidad_responsable = resultado_loc["NOMLOC"]
+      @provincia_responsable = resultado_prov["descrip"].squish
+      @codigo_postal_responsable = resultado["COPOST"]
+      @email_responsable = resultado["EMAIL"].squish
+      @telefono_responsable = resultado["TELEPART"]
+      ActiveRecord::Base.establish_connection(:development).connection
+    end
+
 end

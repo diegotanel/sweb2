@@ -73,6 +73,33 @@
   <%= @asist_tec.monto_numero %>
 </p>
 
+<h3>Integrantes del grupo</h3>
+  <% @integrantes = @asist_tec.integrantes_asist_tec.all %>
+  <table class="table table-striped">
+    <tr>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>DNI</th>
+      <th>Fecha de nacimiento</th>
+      <th>Domicilio</th>
+      <th>Correo Electrónico</th>
+      <th>Teléfono</th>
+      <th>Rol</th>
+    </tr>
+
+    <%= content_tag_for(:tr, @integrantes) do |integrante| %>
+
+      <td><%= integrante.nombre %></td>
+      <td><%= integrante.apellido %></td>
+      <td><%= integrante.dni %></td>
+      <td><%= I18n.l(integrante.fecha_nacimiento) %></td>
+      <td><%= integrante.domicilio %></td>
+      <td><%= integrante.email %></td>
+      <td><%= integrante.telefono %></td>
+      <td><%= integrante.rol %></td>
+      
+    <% end %>
+  </table>
 </br>
 </br>
 <%= link_to t('Volver'), asist_tecs_path %>
