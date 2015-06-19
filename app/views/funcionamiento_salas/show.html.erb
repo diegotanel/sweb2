@@ -1,0 +1,108 @@
+#encoding: utf-8
+<% provide(:title, 'Datos de solicitud de subsidio para funcionamiento de sala o espacio de teatro independiente') %>
+<h1>Datos de solicitud de subsidio para funcionamiento de sala o espacio de teatro independiente</h1>
+
+</br>
+<p>
+  <b>Fecha de inicio:</b>
+  <%= I18n.l(@func_sala.fecha_inicio) %>
+</p>
+
+<p>
+  <b>Nombre de la sala / espacio teatral:</b>
+  <%= @func_sala.nombre_sala %>
+</p>
+
+<p>
+  <b>Domicilio de la sala:</b>
+  <%= @func_sala.domicilio_sala %>
+</p>
+
+<p>
+  <b>Localidad de la sala:</b>
+  <%= @func_sala.localidad_sala %>
+</p>
+
+<p>
+  <b>Codigo Postal de la sala:</b>
+  <%= @func_sala.codigo_postal_sala %>
+</p>
+
+<p>
+  <b>Provincia de la sala:</b>
+  <%= @func_sala.provincia_sala %>
+</p>
+
+<p>
+  <b>Descripción del proyecto previsto y objetivos principales:</b>
+  <%= @func_sala.descipcion_proyecto %>
+</p>
+
+<p>
+  <b>Descripción de las estrategias:</b>
+  <%= @func_sala.descripcion_estrategias %>
+</p>
+
+<p>
+  <b>Detalle del plan de gastos del funcionamiento:</b>
+  <%= @func_sala.detalle_plan_gastos %>
+</p>
+
+<p>
+  <b>Nombre del responsable:</b>
+  <%= @func_sala.nombre %>
+</p>
+
+<p>
+  <b>Apellido del responsable:</b>
+  <%= @func_sala.apellido %>
+</p>
+
+<p>
+  <b>Número de Cuit del responsable:</b>
+  <%= @func_sala.num_cuit %>
+</p>
+
+<p>
+  <b>Domicilio del responsable:</b>
+  <%= @func_sala.domicilio %>
+</p>
+
+<p>
+  <b>Localidad del responsable:</b>
+  <%= @func_sala.localidad %>
+</p>
+
+<p>
+  <b>Codigo Postal del responsable:</b>
+  <%= @func_sala.codigo_postal %>
+</p>
+
+<p>
+  <b>Provincia del responsable:</b>
+  <%= @func_sala.provincia %>
+</p>
+
+<p>
+  <b>Email del responsable:</b>
+  <%= @func_sala.email %>
+</p>
+
+<p>
+  <b>Telefono del responsable:</b>
+  <%= @func_sala.telefono %>
+</p>
+
+<p>
+  <b>Monto solicitado:</b>
+  <%= @func_sala.monto_letra %>
+</p>
+
+<p>
+  <b>Monto solicitado (en números):</b>
+  <%= @func_sala.monto_numero %>
+</p>
+
+</br>
+</br>
+<%= link_to t('Volver'), funcionamiento_salas_path %>

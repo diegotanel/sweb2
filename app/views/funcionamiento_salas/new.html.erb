@@ -1,0 +1,75 @@
+#encoding: utf-8
+<% provide(:title, 'Formulario de solicitud de subsidio para funcionamiento de sala o espacio de teatro independiente') %>
+<h1>Formulario de solicitud de subsidio para funcionamiento de sala o espacio de teatro independiente</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for @func_sala do |f| %>
+      <%= render 'shared/error_messages', :object => f.object %>
+      <%= f.label :nombre_sala, "Nombre de la sala / espacio teatral" %>
+      <%= f.text_field :nombre_sala %>
+
+      <%= f.label :fecha_inicio, "Fecha de inicio" %>
+      <%= f.date_select :anio_inicio, start_year: 1950, end_year: 2014 ,order: [:day, :month, :year], :include_blank => true %>
+
+      <%= f.label :domicilio_sala, "Domicilio de la sala" %>
+      <%= f.text_field :domicilio_sala %>
+
+      <%= f.label :localidad_sala, "Localidad de la sala" %>
+      <%= f.text_field :localidad_sala %>
+
+      <%= f.label :codigo_postal_sala, "Codigo Postal de la sala" %>
+      <%= f.text_field :codigo_postal_sala %>
+
+      <%= f.label :provincia_sala, "Provincia de la sala" %>
+      <%= f.text_field :provincia_sala %>
+
+      <%= f.label :descripcion_proyecto, "Descripción del proyecto previsto y objetivos principales" %>
+      <%= f.text_area :descripcion_proyecto %>
+
+      <%= f.label :descripcion_estrategias, "Descripción de las estrategias" %>
+      <%= f.text_area :descripcion_estrategias %>
+
+      <%= f.label :detalle_plan_gastos, "Detalle del plan de gastos del funcionamiento" %>
+      <%= f.text_area :detalle_plan_gastos %>
+
+      <%= f.label :apellido, "Apellido del responsable" %>
+      <%= f.text_field :apellido, :value => @apellido_responsable, :readonly => true %>
+
+      <%= f.label :num_cuit, "Nº de Cuit" %>
+      <%= f.text_field :num_cuit, :value => @num_cuit_responsable, :readonly => true %>
+
+      <%= f.label :domicilio, "Domicilio" %>
+      <%= f.text_field :domicilio, :value => @domicilio_responsable, :readonly => true %>
+
+      <%= f.label :localidad, "Localidad" %>
+      <%= f.text_field :localidad, :value => @localidad_responsable, :readonly => true %>
+
+      <%= f.label :codigo_postal, "Codigo Postal" %>
+      <%= f.text_field :codigo_postal, :value => @codigo_postal_responsable, :readonly => true %>
+
+      <%= f.label :provincia, "Provincia" %>
+      <%= f.text_field :provincia, :value => @provincia_responsable, :readonly => true %>
+
+      <%= f.label :email, "Correo Electrónico" %>
+      <%= f.text_field :email, :value => @email_responsable, :readonly => true %>
+
+      <%= f.label :telefono, "Telefono" %>
+      <%= f.text_field :telefono, :value => @telefono_responsable, :readonly => true %>
+
+      <p>Monto solicitado al Instituto Nacional del Teatro</p>
+
+      <%= f.label :monto_letra, "Son Pesos" %>
+      <%= f.text_field :monto_letra %>
+
+      <%= f.label :monto_numero, "$ (en números)" %>
+      <%= f.text_field :monto_numero %>
+      </br>
+
+      <%= f.submit "Confirmar", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>
+</br>
+</br>
+<%= link_to t('Volver'), funcionamiento_salas_path %>

@@ -1,0 +1,2 @@
+module FuncionamientoDeSalasHelper
+end

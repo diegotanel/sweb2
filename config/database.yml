@@ -35,11 +35,11 @@ production:
 
 
 inteatro_db_prueba:
-  database: INTEATRODIG_ALTA_PF
+  database: INTEATRODIG_PRUEBA
   adapter: sqlserver
   username: sa
   password: 300956Boxter
-  host: 192.168.0.110
+  host: 192.168.0.3
   port: 1433
 
   #ActiveRecord::Base.establish_connection(:inteatro_db_prueba).connection

@@ -1,5 +1,19 @@
 Rails.application.routes.draw do
 
+  get 'funcionamiento_de_salas/new'
+
+  get 'funcionamiento_de_salas/index'
+
+  get 'funcionamiento_de_salas/create'
+
+  get 'funcionamiento_de_salas/show'
+
+  get 'funcionamiento_de_salas/edit'
+
+  get 'funcionamiento_de_salas/update'
+
+  get 'funcionamiento_de_salas/destroy'
+
   resources :sessions
   resources :users
   resources :realiza_eventos

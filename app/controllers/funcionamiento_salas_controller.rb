@@ -1,55 +1,54 @@
-#encoding: utf-8
-class AsistTecsController < ApplicationController
+class FuncionamientoSalasController < ApplicationController
   before_action :signed_in_user, only: [:new, :show, :create, :index, :edit, :update, :enviar]
 
   def new
-    @asist_tec = AsistTec.new
-    cargar_datos_asist_tec
+    @func_sala = FuncionamientoSala.new
+    cargar_datos_func_sala
   end
 
   def show
-    @asist_tec = AsistTec.find(params[:id])
+    @func_sala = FuncionamientoSala.find(params[:id])
   end
 
   def index
-    @tramites = current_user.tramites.where(tramitable_type: 'AsistTec') ? current_user.tramites.where(tramitable_type: 'AsistTec') : []
+    @tramites = current_user.tramites.where(tramitable_type: 'FuncionamientoSala') ? current_user.tramites.where(tramitable_type: 'FuncionamientoSala') : []
   end
 
   def create
-    @asist_tec = AsistTec.new(asist_tec_params)
-    @asist_tec.saltear_validaciones_de_presencia = true
-    if @asist_tec.save
+    @func_sala = FuncionamientoSala.new(func_sala_params)
+    @func_sala.saltear_validaciones_de_presencia = true
+    if @func_sala.save
       @tramite = current_user.tramites.create!()
-      @tramite.tramitable = @asist_tec
+      @tramite.tramitable = @func_sala
       if @tramite.save
         flash[:success] = "Solicitud correctamente creada"
-        redirect_to asist_tec_integrantes_asist_tec_path(@asist_tec)
+        redirect_to funcionamiento_sala_path(@func_sala)
       end
     else
-      cargar_datos_asist_tec
+      cargar_datos_func_sala
       render 'new'
     end
   end
 
   def edit
-    @asist_tec = AsistTec.find(params[:id])
+    @func_sala = FuncionamientoSala.find(params[:id])
   end
 
   def update
-    @asist_tec = AsistTec.find(params[:id])
-    @asist_tec.saltear_validaciones_de_presencia = true
-    if @asist_tec.update_attributes(asist_tec_params)
+    @func_sala = FuncionamientoSala.find(params[:id])
+    @func_sala.saltear_validaciones_de_presencia = true
+    if @func_sala.update_attributes(func_sala_params)
       flash[:success] = "Solicitud actualizada"
-      redirect_to asist_tec_integrantes_asist_tec_path(@asist_tec)
+      redirect_to funcionamiento_sala_path(@func_sala)
     else
       render 'edit'
     end
   end
 
   def destroy
-    if AsistTec.find(params[:id]).destroy
+    if FuncionamientoSala.find(params[:id]).destroy
       flash[:success] = "Solicitud eliminada"
-      redirect_to asist_tecs_path
+      redirect_to funcionamiento_salas_path
     else
       flash.now[:failure] = "La solicitud no puede ser eliminada"
       render 'index'
@@ -57,20 +56,20 @@ class AsistTecsController < ApplicationController
   end
 
   def enviar
-    @asist_tec = AsistTec.find(params[:id])
-    @asist_tec.estado = AsistTec::ESTADOS[:enviado]
-    @asist_tec.save!
+    @func_sala = FuncionamientoSala.find(params[:id])
+    @func_sala.estado = FuncionamientoSala::ESTADOS[:enviado]
+    @func_sala.save!
     flash[:success] = "Solicitud enviada"
-    redirect_to asist_tecs_path
+    redirect_to funcionamiento_salas_path
   end
 
   private
-    def asist_tec_params
-      params.require(:asist_tec).permit(:nombre_grupo, :nombre, :apellido, :num_cuit,
-       :domicilio, :provincia, :num_registro, :telefono, :email, :localidad, :monto_letra, :monto_numero, :codigo_postal, :anio_inicio)
+    def func_sala_params
+      params.require(:func_sala).permit(:nombre_grupo, :nombre, :apellido, :num_cuit,
+       :domicilio, :provincia, :telefono, :email, :localidad, :monto_letra, :monto_numero, :codigo_postal, :anio_inicio)
     end
 
-    def cargar_datos_asist_tec
+    def cargar_datos_func_sala
       ActiveRecord::Base.establish_connection(:inteatro_db_prueba).connection
       query = "select * from REGISDIG where cuil = 20299050883"
       result = ActiveRecord::Base.connection.select_all(query)
