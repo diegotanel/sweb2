@@ -4,12 +4,15 @@ class FuncionamientoSala < ActiveRecord::Base
   attr_accessor :saltear_validaciones_de_presencia
 
   has_one :tramite, as: :tramitable, dependent: :destroy
+  has_and_belongs_to_many :users
+  
 	default_scope -> { order('created_at DESC') }
 	ESTADOS = {:enviado => 1, :borrador => 2 }
 	before_save { self.email = email.downcase }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(?:\.[a-z\d\-]+)*\.[a-z]+\z/i
 
-	validates :nombre_sala, presence: true, unless: :saltear_validaciones_de_presencia
+  validates :users, presence: { message: "Debe agregar al menos un usuario" }#, unless: :saltear_validaciones_de_presencia
+	validates :nombre_sala, presence: true#, unless: :saltear_validaciones_de_presencia
   validates :nombre_sala, length: {maximum: 70}
   validates :domicilio_sala, presence: true, unless: :saltear_validaciones_de_presencia
   validates :domicilio_sala, length: {maximum: 70}

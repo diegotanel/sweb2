@@ -1,0 +1,9 @@
+<% if @mensaje_error.blank? %>
+	$("#users").append("<%= j (render  "users", func_sala: @funcionamiento_sala, user: @user)  %>")
+<% else %>
+	
+<% end %>
+
+
+
+

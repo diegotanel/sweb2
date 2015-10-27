@@ -1,0 +1,6 @@
+<div class="form-inline">
+	<%= label_tag dom_id(@user), @user.name %>
+	<%= label_tag dom_id(@user), @user.email %>
+	<%= check_box_tag "funcionamiento_sala[user_ids][]", @user.id, @funcionamiento_sala.user_ids.include?(@user.id), id: dom_id(@user) %>		
+	 <button>Eliminar</button>
+</div>

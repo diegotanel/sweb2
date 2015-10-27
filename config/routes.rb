@@ -1,21 +1,22 @@
-Rails.application.routes.draw do
+Rails.application.routes.draw do  
 
-  get 'funcionamiento_de_salas/new'
+  resources :room_categories
 
-  get 'funcionamiento_de_salas/index'
+  resources :hotels
 
-  get 'funcionamiento_de_salas/create'
+      resources :funcionamiento_salas do  
+        collection do
+          post 'obtener_usuario_by_email'
+        end
+      end    
 
-  get 'funcionamiento_de_salas/show'
+  resources :funcionamiento_salas_v2
 
-  get 'funcionamiento_de_salas/edit'
-
-  get 'funcionamiento_de_salas/update'
-
-  get 'funcionamiento_de_salas/destroy'
+  resources :users
 
   resources :sessions
-  resources :users
+     
+
   resources :realiza_eventos
   resources :asist_tecs do
     resources :integrantes_asist_tec do
@@ -29,7 +30,7 @@ Rails.application.routes.draw do
     end
   end
   resources :pub_periodicas
-  resources :pub_eventuales
+  resources :pub_eventualesusers
   resources :pros_inves
   resources :becas_artis
   resources :becas_gestion

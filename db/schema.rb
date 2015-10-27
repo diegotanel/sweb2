@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150531191254) do
+ActiveRecord::Schema.define(version: 20151026095951) do
 
   create_table "asist_tecs", force: :cascade do |t|
     t.string   "nombre_grupo",  null: false
@@ -61,6 +61,78 @@ ActiveRecord::Schema.define(version: 20150531191254) do
     t.integer  "estado"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "funcionamiento_salas", force: :cascade do |t|
+    t.string   "nombre_sala",             null: false
+    t.date     "fecha_inicio",            null: false
+    t.string   "domicilio_sala",          null: false
+    t.string   "localidad_sala",          null: false
+    t.string   "codigo_postal_sala",      null: false
+    t.string   "provincia_sala",          null: false
+    t.text     "descripcion_proyecto",    null: false
+    t.text     "descripcion_estrategias", null: false
+    t.text     "detalle_plan_gastos",     null: false
+    t.string   "nombre",                  null: false
+    t.string   "apellido",                null: false
+    t.string   "num_cuit",                null: false
+    t.string   "domicilio",               null: false
+    t.string   "codigo_postal",           null: false
+    t.string   "localidad",               null: false
+    t.string   "provincia",               null: false
+    t.string   "email",                   null: false
+    t.string   "telefono",                null: false
+    t.string   "monto_letra",             null: false
+    t.string   "monto_numero",            null: false
+    t.integer  "estado"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  create_table "funcionamiento_salas_users", id: false, force: :cascade do |t|
+    t.integer "funcionamiento_sala_id", null: false
+    t.integer "user_id",                null: false
+  end
+
+  add_index "funcionamiento_salas_users", ["funcionamiento_sala_id", "user_id"], name: "func_sala_users_index", unique: true
+  add_index "funcionamiento_salas_users", ["funcionamiento_sala_id"], name: "index_funcionamiento_salas_users_on_funcionamiento_sala_id"
+  add_index "funcionamiento_salas_users", ["user_id"], name: "index_funcionamiento_salas_users_on_user_id"
+
+  create_table "funcionamiento_salas_v2", force: :cascade do |t|
+    t.string   "nombre_sala",                                            null: false
+    t.date     "fecha_inicio_sala",                                      null: false
+    t.string   "domicilio_sala",                                         null: false
+    t.string   "localidad_sala",                                         null: false
+    t.string   "codigo_postal_sala",                                     null: false
+    t.string   "provincia_sala",                                         null: false
+    t.date     "fecha_inicio_periodo_de_subsidio",                       null: false
+    t.boolean  "solicitud_de_subsidio_por_primera_vez",                  null: false
+    t.boolean  "recibio_subsidio_en_el_periodo_inmediatamente_anterior"
+    t.date     "fecha_del_ultimo_periodo_subsidiado_desde"
+    t.date     "fecha_del_ultimo_periodo_subsidiado_hasta"
+    t.text     "descripcion_proyecto",                                   null: false
+    t.text     "descripcion_estrategias",                                null: false
+    t.text     "detalle_plan_gastos",                                    null: false
+    t.string   "nombre_responsable",                                     null: false
+    t.string   "apellido_responsable",                                   null: false
+    t.string   "num_cuit_responsable",                                   null: false
+    t.string   "domicilio_responsable",                                  null: false
+    t.string   "codigo_postal_responsable",                              null: false
+    t.string   "localidad_responsable",                                  null: false
+    t.string   "provincia_responsable",                                  null: false
+    t.string   "email_responsable",                                      null: false
+    t.string   "telefono_responsable",                                   null: false
+    t.string   "monto_letra",                                            null: false
+    t.string   "monto_numero",                                           null: false
+    t.integer  "estado"
+    t.datetime "created_at",                                             null: false
+    t.datetime "updated_at",                                             null: false
+  end
+
+  create_table "hotels", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "integrantes_asist_tec", force: :cascade do |t|
@@ -118,6 +190,15 @@ ActiveRecord::Schema.define(version: 20150531191254) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "room_categories", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "hotel_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "room_categories", ["hotel_id"], name: "index_room_categories_on_hotel_id"
 
   create_table "tramites", force: :cascade do |t|
     t.integer  "tramitable_id"

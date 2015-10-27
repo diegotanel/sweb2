@@ -1,0 +1,6 @@
+  	
+
+	<% User.all.each do |user| %>
+		<%= check_box_tag "funcionamiento_sala[user_ids][]", user.id, @funcionamiento_sala.user_ids.include?(user.id), id: dom_id(user) %>
+		<%= label_tag dom_id(user), user.name %><br>
+	<% end %>  

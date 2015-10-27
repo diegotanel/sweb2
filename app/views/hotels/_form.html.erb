@@ -1,0 +1,50 @@
+<%= form_for(@hotel) do |f| %>
+  <% if @hotel.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@hotel.errors.count, "error") %> prohibited this hotel from being saved:</h2>
+
+      <ul>
+      <% @hotel.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+<%= f.label :name %><br>
+<%= f.text_field :name %>
+</div>
+<h2>Room Categories</h2>
+<%= f.fields_for :room_categories do |room_category| %>
+  <div class="room_category_fields">
+    <div class="field">
+    <%= room_category.label :name %><br>
+    <%= room_category.text_field :name %>
+    <%= room_category.check_box :_destroy %>
+    <%= room_category.label :_destroy, 'remove' %>
+    </div>
+  </div>
+<% end %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @hotel.room_categories.each do |room| %>
+      <tr>
+        <td><%= room.name %> </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+    <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

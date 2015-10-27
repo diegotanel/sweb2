@@ -1,0 +1,17 @@
+<p id="notice"><%= notice %></p>
+<p>
+<strong>Name:</strong>
+<%= @hotel.name %>
+</p>
+<h2>Room Categories</h2>
+<% if @hotel.room_categories.any? %>
+<ul>
+<% @hotel.room_categories.each do |room_category| %>
+<li><%= link_to room_category, room_category %></li>
+<% end %>
+</ul>
+<% else %>
+<p>none available</p>
+<% end %>
+<%= link_to 'Edit', edit_hotel_path(@hotel) %> |
+<%= link_to 'Back', hotels_path %>

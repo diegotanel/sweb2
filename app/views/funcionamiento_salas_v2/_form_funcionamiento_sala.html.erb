@@ -1,0 +1,73 @@
+#encoding: utf-8
+<% provide(:title, 'Formulario de solicitud de subsidio para funcionamiento de sala o espacio de teatro independiente V2') %>
+<h1>Formulario de solicitud de subsidio para funcionamiento de sala o espacio de teatro independiente V2</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@func_sala,  url:  funcionamiento_salas_v2_path) do |f| %>
+      <%= render 'shared/error_messages', :object => f.object %>
+
+      <%= f.label :fecha_inicio_periodo_de_subsidio, "Fecha de inicio del periodo del subsidio" %>
+      <%= f.date_select :fecha_inicio_periodo_de_subsidio, start_year: 1950, end_year: 2015 ,order: [:day, :month, :year], :include_blank => true %>
+
+      <p>¿Solicita subsidio por primera vez?</p>
+
+      <%= f.label :solicitud_de_subsidio_por_primera_vez, 'No', :value => 'No' %>
+      <%= f.radio_button :solicitud_de_subsidio_por_primera_vez, 'No', :checked => true %>
+
+      <%= f.label :solicitud_de_subsidio_por_primera_vez, 'Si', :value => 'Si' %>
+      <%= f.radio_button :solicitud_de_subsidio_por_primera_vez, 'Si' %></br>
+      </br>
+
+      <p>¿Recibió en el período inmediato anterior?</p>
+
+      <%= f.label :recibio_subsidio_en_el_periodo_inmediatamente_anterior, 'No', :value => 'No' %>
+      <%= f.radio_button :recibio_subsidio_en_el_periodo_inmediatamente_anterior, 'No', :checked => true %>
+
+      <%= f.label :recibio_subsidio_en_el_periodo_inmediatamente_anterior, 'Si', :value => 'Si' %>
+      <%= f.radio_button :recibio_subsidio_en_el_periodo_inmediatamente_anterior, 'Si' %></br>
+      </br>
+
+      <%= f.label :fecha_del_ultimo_periodo_subsidiado_desde, "Fecha del último periodo subsidiado desde" %>
+      <%= f.date_select :fecha_del_ultimo_periodo_subsidiado_desde, start_year: 1950, end_year: 2015 ,order: [:day, :month, :year], :include_blank => true %>
+
+      <%= f.label :fecha_del_ultimo_periodo_subsidiado_hasta, "Fecha del último periodo subsidiado hasta" %>
+      <%= f.date_select :fecha_del_ultimo_periodo_subsidiado_hasta, start_year: 1950, end_year: 2015 ,order: [:day, :month, :year], :include_blank => true %>
+
+      <%= f.label :descripcion_proyecto, "Descripción del proyecto previsto y objetivos principales" %>
+      <%= f.text_area :descripcion_proyecto %>
+
+      <%= f.label :descripcion_estrategias, "Descripción de las estrategias" %>
+      <%= f.text_area :descripcion_estrategias %>
+
+      <%= f.label :detalle_plan_gastos, "Detalle del plan de gastos del funcionamiento" %>
+      <%= f.text_area :detalle_plan_gastos %>
+
+      <%= f.label :telefono, "Telefono" %>
+      <%= f.text_field :telefono, :value => @telefono_responsable, :readonly => true %>
+
+      <p>Monto solicitado al Instituto Nacional del Teatro</p>
+
+      <%= f.label :monto_letra, "Son Pesos" %>
+      <%= f.text_field :monto_letra %>
+
+      <%= f.label :monto_numero, "$ (en números)" %>
+      <%= f.text_field :monto_numero %>
+
+      <%= hidden_field_tag :usuarios %>
+
+      </br>
+      </br>
+
+      <h2>Users asignados</h2>                      
+        <div class="form-inline">          
+          <%= label_tag "Nombre" %> 
+          <%= label_tag "Email" %> 
+          <%= label_tag "Accion" %>           
+       </div> 
+
+
+    <%= f.submit "Confirmar", class: "btn btn-large btn-primary" %>  
+    </div>
+  </div>
+ <% end %>

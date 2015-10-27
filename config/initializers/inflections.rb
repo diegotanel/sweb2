@@ -31,4 +31,6 @@ ActiveSupport::Inflector.inflections do |inflect|
 	inflect.irregular 'consulta_estado', 'consultas_estado'
 	inflect.irregular 'integrante_asist_tec', 'integrantes_asist_tec'
 	inflect.irregular 'funcionamiento_sala', 'funcionamiento_salas'
+	inflect.irregular 'funcionamiento_sala_v2', 'funcionamiento_salas_v2'
+	inflect.irregular 'user', 'users'
 end
