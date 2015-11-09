@@ -1,6 +1,6 @@
 #encoding: utf-8
 <% provide(:title, 'Pagina de Inicio') %>
-<body>
+<!-- <body>
 	<div id="menu">
 		<ul>
 		  <li class="nivel1 primera"><a href="#" class="nivel1">Datos personales</a>
@@ -26,4 +26,14 @@
 			</li>
 		</ul>
 	</div>
-</body>
+</body> -->
+
+<h1>Iniciar nueva solicitud</h1>
+<%= link_to t('Funcionamiento de sala'), new_funcionamiento_sala_v2_path, class: "btn btn-large btn-small" %>
+</br>
+</br>
+<%= link_to t('Grupo comunitario'), new_funcionamiento_sala_v2_path, class: "btn btn-large btn-small" %>
+</br>
+
+<h1>Solicitudes Borrador</h1>
+<h1>Solicitudes Enviadas</h1>

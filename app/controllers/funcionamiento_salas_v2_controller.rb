@@ -22,8 +22,10 @@ class FuncionamientoSalasV2Controller < ApplicationController
   end
 
   def create      
-    @func_sala = FuncionamientoSalaV2.new(params[:funcionamiento_sala])
-    @func_sala.saltear_validaciones_de_presencia = true
+    @func_sala = FuncionamientoSalaV2.new(func_sala_params)
+    #@func_sala.saltear_validaciones_de_presencia = true
+    puts @func_sala.valid?
+    puts @func_sala.errors.inspect
     if @func_sala.save
       @tramite = current_user.tramites.create!()
       @tramite.tramitable = @func_sala
@@ -127,12 +129,12 @@ class FuncionamientoSalasV2Controller < ApplicationController
 
   private
     def func_sala_params
-      params.require(:funcionamiento_sala).permit(:nombre_sala, :fecha_inicio, :domicilio_sala, :localidad_sala,
-      :codigo_postal_sala, :provincia_sala, :descripcion_proyecto, :descripcion_estrategias, :detalle_plan_gastos, 
-      :nombre, :apellido, :num_cuit, :domicilio, :codigo_postal, :domicilio, :localidad, :provincia, :email, :telefono,
-      :monto_letra, :monto_numero, :user_ids => []) 
+      # params.require(:funcionamiento_sala).permit(:nombre_sala, :fecha_inicio, :domicilio_sala, :localidad_sala,
+      # :codigo_postal_sala, :provincia_sala, :descripcion_proyecto, :descripcion_estrategias, :detalle_plan_gastos, 
+      # :nombre, :apellido, :num_cuit, :domicilio, :codigo_postal, :domicilio, :localidad, :provincia, :email, :telefono,
+      # :monto_letra, :monto_numero, :user_ids => []) 
 
-#      params.require(:funcionamiento_sala).permit! 
+      params.require(:funcionamiento_sala_v2).permit! 
       #params.require(:hotel).permit(:name, room_categories_attributes: [ :id, :name ])
     end
 
@@ -180,9 +182,9 @@ class FuncionamientoSalasV2Controller < ApplicationController
         @provincia_sala = resultado_prov["descrip"]
         @localidad_sala = resultado_loc["NOMLOC"]
 
-        query_integrantes = "select * from Integrante where codigoRegistro = 6005"
-        result_integrantes = ActiveRecord::Base.connection.select_all(query_integrantes)
-        resultado_integrantes = result.to_hash[0]
+        # query_integrantes = "select * from Integrante where codigoRegistro = 6005"
+        # result_integrantes = ActiveRecord::Base.connection.select_all(query_integrantes)
+        # resultado_integrantes = result.to_hash[0]
       rescue
 
       ensure

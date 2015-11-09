@@ -1,5 +1,5 @@
 class FuncionamientoSalaV2 < ActiveRecord::Base
-	before_save :validacion_digitoverificador_de_cuit_cuil!
+	#before_save :validacion_digitoverificador_de_cuit_cuil!
 
   attr_accessor :saltear_validaciones_de_presencia
 
@@ -38,7 +38,7 @@ class FuncionamientoSalaV2 < ActiveRecord::Base
  #  validates :telefono_responsable, numericality: { only_integer: true }
 
   validates :fecha_inicio_periodo_de_subsidio, :presence => true
-  validates :solicitud_de_subsidio_por_primera_vez, :presence => true
+  #validates :solicitud_de_subsidio_por_primera_vez, :presence => true
 	validates :estado, :presence => true, :inclusion => { :in => self::ESTADOS.values }
   validates :monto_letra, presence: true
   validates :monto_numero, presence: true
