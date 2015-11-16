@@ -2,31 +2,31 @@ class CreateFuncionamientoSalasV2 < ActiveRecord::Migration
   def change
     create_table :funcionamiento_salas_v2 do |t|
 
-    	t.string :nombre_sala, :null => false
-      t.date :fecha_inicio_sala, :null => false
-      t.string :domicilio_sala, :null => false
-      t.string :localidad_sala, :null => false
-      t.string :codigo_postal_sala, :null => false
-      t.string :provincia_sala, :null => false
-      t.date :fecha_inicio_periodo_de_subsidio, :null => false
-      t.boolean :solicitud_de_subsidio_por_primera_vez, :null => false
+    	t.string :nombre_sala
+      t.date :fecha_inicio_sala
+      t.string :domicilio_sala
+      t.string :localidad_sala
+      t.string :codigo_postal_sala
+      t.string :provincia_sala
+      t.date :fecha_inicio_periodo_de_subsidio
+      t.boolean :solicitud_de_subsidio_por_primera_vez
       t.boolean :recibio_subsidio_en_el_periodo_inmediatamente_anterior
       t.date :fecha_del_ultimo_periodo_subsidiado_desde
       t.date :fecha_del_ultimo_periodo_subsidiado_hasta
-      t.text :descripcion_proyecto, :null => false
-      t.text :descripcion_estrategias, :null => false
-      t.text :detalle_plan_gastos, :null => false
-      t.string :nombre_responsable, :null => false
-      t.string :apellido_responsable, :null => false
-      t.string :num_cuit_responsable, :null => false, unique: true
-      t.string :domicilio_responsable, :null => false
-      t.string :codigo_postal_responsable, :null => false
-      t.string :localidad_responsable, :null => false
-      t.string :provincia_responsable, :null => false
-      t.string :email_responsable, :null => false
-      t.string :telefono_responsable, :null => false
-      t.string :monto_letra, :null => false
-      t.string :monto_numero, :null => false
+      t.text :descripcion_proyecto
+      t.text :descripcion_estrategias
+      t.text :detalle_plan_gastos
+      t.string :nombre_responsable
+      t.string :apellido_responsable
+      t.string :num_cuit_responsable, unique: true
+      t.string :domicilio_responsable
+      t.string :codigo_postal_responsable
+      t.string :localidad_responsable
+      t.string :provincia_responsable
+      t.string :email_responsable
+      t.string :telefono_responsable
+      t.string :monto_letra
+      t.string :monto_numero
     	t.integer :estado
 
       t.timestamps null: false

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151026095951) do
+ActiveRecord::Schema.define(version: 20151116184127) do
 
   create_table "asist_tecs", force: :cascade do |t|
     t.string   "nombre_grupo",  null: false
@@ -99,31 +99,31 @@ ActiveRecord::Schema.define(version: 20151026095951) do
   add_index "funcionamiento_salas_users", ["user_id"], name: "index_funcionamiento_salas_users_on_user_id"
 
   create_table "funcionamiento_salas_v2", force: :cascade do |t|
-    t.string   "nombre_sala",                                            null: false
-    t.date     "fecha_inicio_sala",                                      null: false
-    t.string   "domicilio_sala",                                         null: false
-    t.string   "localidad_sala",                                         null: false
-    t.string   "codigo_postal_sala",                                     null: false
-    t.string   "provincia_sala",                                         null: false
-    t.date     "fecha_inicio_periodo_de_subsidio",                       null: false
-    t.boolean  "solicitud_de_subsidio_por_primera_vez",                  null: false
+    t.string   "nombre_sala"
+    t.date     "fecha_inicio_sala"
+    t.string   "domicilio_sala"
+    t.string   "localidad_sala"
+    t.string   "codigo_postal_sala"
+    t.string   "provincia_sala"
+    t.date     "fecha_inicio_periodo_de_subsidio"
+    t.boolean  "solicitud_de_subsidio_por_primera_vez"
     t.boolean  "recibio_subsidio_en_el_periodo_inmediatamente_anterior"
     t.date     "fecha_del_ultimo_periodo_subsidiado_desde"
     t.date     "fecha_del_ultimo_periodo_subsidiado_hasta"
-    t.text     "descripcion_proyecto",                                   null: false
-    t.text     "descripcion_estrategias",                                null: false
-    t.text     "detalle_plan_gastos",                                    null: false
-    t.string   "nombre_responsable",                                     null: false
-    t.string   "apellido_responsable",                                   null: false
-    t.string   "num_cuit_responsable",                                   null: false
-    t.string   "domicilio_responsable",                                  null: false
-    t.string   "codigo_postal_responsable",                              null: false
-    t.string   "localidad_responsable",                                  null: false
-    t.string   "provincia_responsable",                                  null: false
-    t.string   "email_responsable",                                      null: false
-    t.string   "telefono_responsable",                                   null: false
-    t.string   "monto_letra",                                            null: false
-    t.string   "monto_numero",                                           null: false
+    t.text     "descripcion_proyecto"
+    t.text     "descripcion_estrategias"
+    t.text     "detalle_plan_gastos"
+    t.string   "nombre_responsable"
+    t.string   "apellido_responsable"
+    t.string   "num_cuit_responsable"
+    t.string   "domicilio_responsable"
+    t.string   "codigo_postal_responsable"
+    t.string   "localidad_responsable"
+    t.string   "provincia_responsable"
+    t.string   "email_responsable"
+    t.string   "telefono_responsable"
+    t.string   "monto_letra"
+    t.string   "monto_numero"
     t.integer  "estado"
     t.datetime "created_at",                                             null: false
     t.datetime "updated_at",                                             null: false
@@ -134,6 +134,16 @@ ActiveRecord::Schema.define(version: 20151026095951) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "instituciones_que_dieron_apoyo", force: :cascade do |t|
+    t.string   "institucion"
+    t.string   "estado_de_apoyo"
+    t.integer  "funcionamiento_sala_v2_id"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "instituciones_que_dieron_apoyo", ["funcionamiento_sala_v2_id"], name: "instituciones_subs_on_func_sala_v2"
 
   create_table "integrantes_asist_tec", force: :cascade do |t|
     t.string   "nombre",           null: false
@@ -150,6 +160,17 @@ ActiveRecord::Schema.define(version: 20151026095951) do
   end
 
   add_index "integrantes_asist_tec", ["asist_tec_id"], name: "index_integrantes_asist_tec_on_asist_tec_id"
+
+  create_table "integrantes_participa_proyecto_subsidio", force: :cascade do |t|
+    t.string   "nombre_y_apellido"
+    t.string   "proyecto_en_el_que_participa"
+    t.string   "tipo_subsidio_solicitado"
+    t.integer  "funcionamiento_sala_v2_id"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  add_index "integrantes_participa_proyecto_subsidio", ["funcionamiento_sala_v2_id"], name: "int_proy_subs_on_func_sala_v2"
 
   create_table "pros_inves", force: :cascade do |t|
     t.string   "nombre",     null: false
@@ -190,6 +211,16 @@ ActiveRecord::Schema.define(version: 20151026095951) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "registros_plan_de_gasto_de_funcionamiento_de_sala", force: :cascade do |t|
+    t.string   "rubro"
+    t.decimal  "monto"
+    t.integer  "funcionamiento_sala_v2_id"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "registros_plan_de_gasto_de_funcionamiento_de_sala", ["funcionamiento_sala_v2_id"], name: "index_reg_plan_de_gasto_on_func_sala_v2"
 
   create_table "room_categories", force: :cascade do |t|
     t.string   "name"

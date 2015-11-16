@@ -9,8 +9,10 @@
       <%= f.label :nombre_sala, "Nombre de la sala / espacio teatral" %>
       <%= f.text_field :nombre_sala %>
 
-      <%= f.label :fecha_inicio, "Fecha de inicio" %>
-      <%= f.date_select :anio_inicio, start_year: 1950, end_year: 2014 ,order: [:day, :month, :year], :include_blank => true %>
+      <%= f.hidden_field :id %>
+
+      <%= f.label :fecha_inicio_sala,"Fecha de inicio"  %>
+      <%= f.text_field :fecha_inicio_sala %>  
 
       <%= f.label :domicilio_sala, "Domicilio de la sala" %>
       <%= f.text_field :domicilio_sala %>
@@ -28,34 +30,124 @@
       <%= f.text_area :descripcion_proyecto %>
 
       <%= f.label :descripcion_estrategias, "Descripción de las estrategias" %>
-      <%= f.text_area :descripcion_estrategias %>
+      <%= f.text_area :descripcion_estrategias %></br>
 
-      <%= f.label :detalle_plan_gastos, "Detalle del plan de gastos del funcionamiento" %>
-      <%= f.text_area :detalle_plan_gastos %>
+      <div class="form-inline">
+      <p>Registros de plan de pagos:</p>
+        <%= label_tag :rubro %>
+        <%= text_field_tag :rubro, nil,  class: "input-small" %>
+        <%= label_tag :monto %>
+        <%= text_field_tag :monto, nil, class: "input-small"%> 
+        <input type="button" value="Agregar" id="agregar_registro_de_plan", class="input-small"> </br>
+      </div>
+      </br>
 
-      <%= f.label :apellido, "Apellido del responsable" %>
-      <%= f.text_field :apellido, :value => @apellido_responsable, :readonly => true %>
+      <div id="tabla_registro_de_pagos"> 
+        <% if !@func_sala.registros_plan_de_gasto_de_funcionamiento_de_sala.nil? && @func_sala.registros_plan_de_gasto_de_funcionamiento_de_sala.length > 0 %>
+        <table class="table">
+            <thead>
+              <tr>      
+                <th>Rubro</th>
+                <th>Monto</th>    
+                <th>Acción</th>  
+              </tr>
+            </thead>
+            <tbody>
+              <% @func_sala.registros_plan_de_gasto_de_funcionamiento_de_sala.each do |registro| %>
+                <tr>        
+                  <td><%= registro.rubro %></td>
+                  <td><%= registro.monto %></td>    
+                  <td><%= link_to 'Eliminar', funcionamiento_sala_v2_registro_plan_de_gasto_de_funcionamiento_de_sala_path(@func_sala, registro), method: :delete,:remote => true, data: { confirm: '¿Estas seguro?' } %></td>      
+                </tr>
+              <% end %>
+            </tbody>
+            <tfoot>
+                <tr>  
+                  <td>TOTAL</td>
+                  <td><%= @func_sala.registros_plan_de_gasto_de_funcionamiento_de_sala.sum(:monto) %></td> 
+                </tr> 
+            </tfoot>
 
-      <%= f.label :num_cuit, "Nº de Cuit" %>
-      <%= f.text_field :num_cuit, :value => @num_cuit_responsable, :readonly => true %>
+          </table>
+          <br>
+        <% end %>
+      </div>       
 
-      <%= f.label :domicilio, "Domicilio" %>
-      <%= f.text_field :domicilio, :value => @domicilio_responsable, :readonly => true %>
+      <p>¿Solicita subsidio por primera vez?</p>
+      <div class="form-inline">
+          <% @si = true %>
+          <% @no = false %>
+        <% unless @func_sala.try(:solicitud_de_subsidio_por_primera_vez) %>
+          <% @si = false %>
+          <% @no = true %>
+        <% end %>
+          <%= f.label :solicitud_de_subsidio_por_primera_vez, 'No', :value => 'No'%>
+          <%= f.radio_button :solicitud_de_subsidio_por_primera_vez, 'false', :checked => @no %>
+          <%= f.label :solicitud_de_subsidio_por_primera_vez, 'Si', :value => 'Si' %>
+          <%= f.radio_button :solicitud_de_subsidio_por_primera_vez, 'true', :checked => @si %>
+      </div>
 
-      <%= f.label :localidad, "Localidad" %>
-      <%= f.text_field :localidad, :value => @localidad_responsable, :readonly => true %>
+      <% unless @func_sala.solicitud_de_subsidio_por_primera_vez %>        
+            <div id="div_datos_subsidio_primera_vez" class="span6 offset1"> 
+               <%= render 'datos_subsidio_primera_vez', :object => f.object %>
+            </div>
+        <% else %>
+            <div id="div_datos_subsidio_primera_vez" class="span6 offset1">
+            </div>
+            <br>
+      <% end %> 
 
-      <%= f.label :codigo_postal, "Codigo Postal" %>
-      <%= f.text_field :codigo_postal, :value => @codigo_postal_responsable, :readonly => true %>
+      <p>Algún integrante participa en otro proyecto que haya solicitado subsidio al INT en el periodo que se solicita subsidio?</p>
+          <% @si_integrante = false 
+             @no_integrante = true        
+          if !@func_sala.integrantes_participa_proyecto_subsidio.nil? && @func_sala.integrantes_participa_proyecto_subsidio.count > 0 
+           @si_integrante = true
+           @no_integrante = false 
+          end %>
 
-      <%= f.label :provincia, "Provincia" %>
-      <%= f.text_field :provincia, :value => @provincia_responsable, :readonly => true %>
+      <div class="form-inline">
+        <%= label_tag :algun_integrante_participa, 'No', :value => 'No' %>
+        <%= radio_button_tag :algun_integrante_participa, 'false', @no_integrante %>
 
-      <%= f.label :email, "Correo Electrónico" %>
-      <%= f.text_field :email, :value => @email_responsable, :readonly => true %>
+        <%= label_tag :algun_integrante_participa, 'Si', :value => 'Si' %>
+        <%= radio_button_tag :algun_integrante_participa, 'true', @si_integrante  %> </br>
+      </div>
 
-      <%= f.label :telefono, "Telefono" %>
-      <%= f.text_field :telefono, :value => @telefono_responsable, :readonly => true %>
+      <% if !@func_sala.integrantes_participa_proyecto_subsidio.nil? && @func_sala.integrantes_participa_proyecto_subsidio.count > 0 %>      
+          <div id="div_datos_integrantes_que_participan_en_otro_proyecto"> 
+             <%= render "datos_integrantes_que_participan_en_otro_proyecto", :object => f.object  %> 
+          </div>
+      <% else %>
+          <div id="div_datos_integrantes_que_participan_en_otro_proyecto">
+          </div>
+          <br>
+      <% end %> 
+
+      <p>La Sala, solicitó y/o recibió otro apoyo institucional para este funcionamiento?</p>
+      <% @si = false 
+         @no = true        
+      if !@func_sala.instituciones_que_dieron_apoyo.nil? && @func_sala.instituciones_que_dieron_apoyo.count > 0 
+       @si = true
+       @no = false 
+      end %>
+
+      <div class="form-inline">
+        <%= label_tag :solicito_apoyo, 'No', :value => 'No' %>
+        <%= radio_button_tag :solicito_apoyo, 'false', @no %>
+
+        <%= label_tag :solicito_apoyo, 'Si', :value => 'Si' %>
+        <%= radio_button_tag :solicito_apoyo, 'true', @si  %> </br>
+      </div>
+
+      <% if !@func_sala.instituciones_que_dieron_apoyo.nil? && @func_sala.instituciones_que_dieron_apoyo.count > 0 %>      
+          <div id="div_datos_instituciones_que_dieron_apoyo"> 
+             <%= render "datos_instituciones_que_dieron_apoyo", :object => f.object  %> 
+          </div>
+      <% else %>
+          <div id="div_datos_instituciones_que_dieron_apoyo">
+          </div>
+          <br>
+      <% end %> 
 
       <p>Monto solicitado al Instituto Nacional del Teatro</p>
 

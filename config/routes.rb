@@ -1,5 +1,7 @@
 Rails.application.routes.draw do  
 
+  get 'institucion_que_dieron_apoyo/index'
+
   resources :room_categories
 
   resources :hotels
@@ -10,7 +12,25 @@ Rails.application.routes.draw do
         end
       end    
 
-  resources :funcionamiento_salas_v2
+  resources :funcionamiento_salas_v2 do
+    member do
+      get :enviar
+      post :pegar_form_datos_integrantes_que_participan_en_otro_proyecto
+      post :pegar_form_datos_instituciones_que_dieron_apoyo
+      post :agregar_integrante_proyecto_subsidio
+      post :agregar_institucion_de_apoyo
+    end
+    collection do
+      post 'pegar_form_datos_subsidio_primera_vez'
+    end 
+    resources :registros_plan_de_gasto_de_funcionamiento_de_sala , only: [:destroy] do
+    end
+    resources :integrantes_participa_proyecto_subsidio , only: [:destroy] do
+    end
+    collection do
+       post 'traer_registro_de_plan_de_gasto'
+    end
+  end     
 
   resources :users
 

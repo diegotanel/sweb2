@@ -1,0 +1,2 @@
+module RegistroPlanDeGastoDeFuncionamientoDeSalaHelper
+end

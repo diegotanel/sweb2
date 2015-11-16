@@ -33,4 +33,7 @@ ActiveSupport::Inflector.inflections do |inflect|
 	inflect.irregular 'funcionamiento_sala', 'funcionamiento_salas'
 	inflect.irregular 'funcionamiento_sala_v2', 'funcionamiento_salas_v2'
 	inflect.irregular 'user', 'users'
+	inflect.irregular 'registro_plan_de_gasto_de_funcionamiento_de_sala', 'registros_plan_de_gasto_de_funcionamiento_de_sala'
+	inflect.irregular 'integrante_participa_proyecto_subsidio', 'integrantes_participa_proyecto_subsidio'
+	inflect.irregular 'institucion_que_dieron_apoyo', 'instituciones_que_dieron_apoyo'
 end

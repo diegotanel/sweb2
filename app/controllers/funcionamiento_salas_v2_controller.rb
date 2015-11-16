@@ -3,7 +3,11 @@ class FuncionamientoSalasV2Controller < ApplicationController
 
   def new
     @func_sala = FuncionamientoSalaV2.new
+    ##@func_sala = FuncionamientoSalaV2.save(:validate => false)
     @func_sala.form_func = params[:form_func] if params.has_key?(:form_func)
+    @func_sala.saltear_validaciones_de_presencia = true
+    @func_sala.save
+    # #@func_sala.form_func = params[:form_func] if params.has_key?(:form_func)
     @user = User.new
     #cargar_datos_func_sala
   end
@@ -81,9 +85,9 @@ class FuncionamientoSalasV2Controller < ApplicationController
   def update
     @func_sala = FuncionamientoSalaV2.find(params[:id])
     @func_sala.saltear_validaciones_de_presencia = true
-    if @func_sala.update_attributes(func_sala_params)
+    if @func_sala.update(func_sala_params)
       flash[:success] = "Solicitud actualizada"
-      redirect_to funcionamiento_sala_path(@func_sala)
+      redirect_to root_path
     else
       render 'edit'
     end
@@ -101,11 +105,81 @@ class FuncionamientoSalasV2Controller < ApplicationController
 
   def enviar
     @func_sala = FuncionamientoSalaV2.find(params[:id])
+    @func_sala.saltear_validaciones_de_presencia = true
     @func_sala.estado = FuncionamientoSalaV2::ESTADOS[:enviado]
-    @func_sala.save!
+    @func_sala.save
     flash[:success] = "Solicitud enviada"
-    redirect_to funcionamiento_salas_path
+    redirect_to root_path
   end
+
+
+  def traer_registro_de_plan_de_gasto
+    #funcionamiento_sala_id = params[:funcionamiento_sala_id]        
+
+    puts "******************* llegue"
+    rubro = params[:rubro]
+    monto = params[:monto]
+
+    @func_sala = FuncionamientoSalaV2.find(params[:funcionamiento_sala_id])
+    nuevo_registro = RegistroPlanDeGastoDeFuncionamientoDeSala.new(rubro: rubro, monto: monto)
+
+    @func_sala.registros_plan_de_gasto_de_funcionamiento_de_sala << nuevo_registro
+          
+    #pass @reportes_a_fecha to index.html.erb and update only the tbody with id=content which takes @query
+    #render :partial => 'form_tabla_stock'
+    respond_to do |format|   
+      format.js { }
+    end 
+  end
+
+  
+  def agregar_integrante_proyecto_subsidio
+    funcionamiento_sala_id = params[:id]        
+    nombre_y_apellido = params[:nombre_y_apellido]
+    proyecto_en_el_que_participa = params[:proyecto_en_el_que_participa]
+    tipo_de_subsidio = params[:tipo_de_subsidio]
+
+    @func_sala = FuncionamientoSalaV2.find(funcionamiento_sala_id)
+    nuevo_registro = IntegranteParticipaProyectoSubsidio.new(nombre_y_apellido: nombre_y_apellido, proyecto_en_el_que_participa: proyecto_en_el_que_participa, tipo_subsidio_solicitado: tipo_de_subsidio)
+
+    @func_sala.integrantes_participa_proyecto_subsidio << nuevo_registro
+          
+    #pass @reportes_a_fecha to index.html.erb and update only the tbody with id=content which takes @query
+    #render :partial => 'form_tabla_stock'
+    respond_to do |format|   
+      format.js { }
+    end 
+  end
+
+
+  # def eliminar_registro__plan__de_gasto
+  #   if RegistroPlanDeGastoDeFuncionamientoDeSala.find(params[:id]).destroy
+  #     flash[:success] = "Solicitud eliminada"
+  #     redirect_to funcionamiento_salas_path
+  #   else
+  #     flash.now[:failure] = "La solicitud no puede ser eliminada"
+  #     render 'index'
+  #   end
+  # end
+
+  def pegar_form_datos_subsidio_primera_vez
+      partial = params[:partial_name]
+      render( :partial => partial )                                  
+  end
+
+  
+  def pegar_form_datos_integrantes_que_participan_en_otro_proyecto
+      @func_sala = FuncionamientoSalaV2.find(params[:id])
+      partial = params[:partial_name]
+      render( :partial => partial )                                  
+  end
+
+  def pegar_form_datos_instituciones_que_dieron_apoyo
+      @func_sala = FuncionamientoSalaV2.find(params[:id])
+      partial = params[:partial_name]
+      render( :partial => partial )                                  
+  end
+
 
   # def obtener_usuario_by_email                       
   #     @user_encontrado = User.where("email = ?", params[:email])       
