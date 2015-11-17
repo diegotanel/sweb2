@@ -97,7 +97,7 @@
             <br>
       <% end %> 
 
-      <p>Algún integrante participa en otro proyecto que haya solicitado subsidio al INT en el periodo que se solicita subsidio?</p>
+      <p>¿Algún integrante participa en otro proyecto que haya solicitado subsidio al INT en el periodo que se solicita subsidio?</p>
           <% @si_integrante = false 
              @no_integrante = true        
           if !@func_sala.integrantes_participa_proyecto_subsidio.nil? && @func_sala.integrantes_participa_proyecto_subsidio.count > 0 
@@ -123,7 +123,7 @@
           <br>
       <% end %> 
 
-      <p>La Sala, solicitó y/o recibió otro apoyo institucional para este funcionamiento?</p>
+      <p>¿La Sala, solicitó y/o recibió otro apoyo institucional para este funcionamiento?</p>
       <% @si = false 
          @no = true        
       if !@func_sala.instituciones_que_dieron_apoyo.nil? && @func_sala.instituciones_que_dieron_apoyo.count > 0 

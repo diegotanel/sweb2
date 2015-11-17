@@ -3,35 +3,7 @@
 <h1>Datos de solicitud de subsidio para funcionamiento de sala o espacio de teatro independiente V2</h1>
 
 </br>
-<p>
-  <b>Fecha de inicio:</b>
-  <%= I18n.l(@func_sala.fecha_inicio) %>
-</p>
 
-<p>
-  <b>Nombre de la sala / espacio teatral:</b>
-  <%= @func_sala.nombre_sala %>
-</p>
-
-<p>
-  <b>Domicilio de la sala:</b>
-  <%= @func_sala.domicilio_sala %>
-</p>
-
-<p>
-  <b>Localidad de la sala:</b>
-  <%= @func_sala.localidad_sala %>
-</p>
-
-<p>
-  <b>Codigo Postal de la sala:</b>
-  <%= @func_sala.codigo_postal_sala %>
-</p>
-
-<p>
-  <b>Provincia de la sala:</b>
-  <%= @func_sala.provincia_sala %>
-</p>
 
 <p>
   <b>Descripción del proyecto previsto y objetivos principales:</b>
@@ -42,57 +14,177 @@
   <b>Descripción de las estrategias:</b>
   <%= @func_sala.descripcion_estrategias %>
 </p>
+</br>
+<p>Registros de plan de pagos:</p>
 
-<p>
-  <b>Detalle del plan de gastos del funcionamiento:</b>
-  <%= @func_sala.detalle_plan_gastos %>
-</p>
+<div id="tabla_registro_de_pagos"> 
+        <% if !@func_sala.registros_plan_de_gasto_de_funcionamiento_de_sala.nil? && @func_sala.registros_plan_de_gasto_de_funcionamiento_de_sala.length > 0 %>
+        <table class="table">
+            <thead>
+              <tr>      
+                <th>Rubro</th>
+                <th>Monto</th>    
+              </tr>
+            </thead>
+            <tbody>
+              <% @func_sala.registros_plan_de_gasto_de_funcionamiento_de_sala.each do |registro| %>
+                <tr>        
+                  <td><%= registro.rubro %></td>
+                  <td><%= registro.monto %></td>     
+                </tr>
+              <% end %>
+            </tbody>
+            <tfoot>
+                <tr>  
+                  <td>TOTAL</td>
+                  <td><%= @func_sala.registros_plan_de_gasto_de_funcionamiento_de_sala.sum(:monto) %></td> 
+                </tr> 
+            </tfoot>
+          </table>
+          <br>
+        <% end %>
+   </div>       
+</br>
+ <p>¿Solicita subsidio por primera vez?</p>
+  <div class="form-inline">
+      <% @si = false %>
+      <% @no = true %>
+    <% if @func_sala.fecha_del_ultimo_periodo_subsidiado_desde.blank? && @func_sala.fecha_del_ultimo_periodo_subsidiado_hasta.blank? %>
+      <% @si = true %>
+      <% @no = false %>
+    <% end %>
+     <div class="form-inline">
+		<%= label_tag :solicitud_de_subsidio_por_primera_vez, 'No', :value => 'No' %>
+		<%= radio_button_tag :solicitud_de_subsidio_por_primera_vez, 'No', :checked => @no %>
 
-<p>
-  <b>Nombre del responsable:</b>
-  <%= @func_sala.nombre %>
-</p>
+		<%= label_tag :solicitud_de_subsidio_por_primera_vez, 'Si', :value => 'Si' %>
+		<%= radio_button_tag :solicitud_de_subsidio_por_primera_vez, 'Si', :checked => @si %></br>
+	</div>
+  </div>
+  <% unless @func_sala.solicitud_de_subsidio_por_primera_vez %>   
+  			<p>¿Recibió en el período inmediato anterior?</p>     
+           <div class="form-inline">
+				<%= label_tag :recibio_subsidio_en_el_periodo_inmediatamente_anterior, 'No', :value => 'No' %>
+				<%= radio_button_tag :recibio_subsidio_en_el_periodo_inmediatamente_anterior, 'No', :checked => true %>
 
-<p>
-  <b>Apellido del responsable:</b>
-  <%= @func_sala.apellido %>
-</p>
+				<%= label_tag :recibio_subsidio_en_el_periodo_inmediatamente_anterior, 'Si', :value => 'Si' %>
+				<%= radio_button_tag :recibio_subsidio_en_el_periodo_inmediatamente_anterior, 'Si', :checked => false  %></br>
+			</div>
 
-<p>
-  <b>Número de Cuit del responsable:</b>
-  <%= @func_sala.num_cuit %>
-</p>
+			<div class="form-inline">
+				<%= label_tag :fecha_del_ultimo_periodo_subsidiado_desde, "Fecha desde" %>      
+ 			    <%= @func_sala.try(:fecha_del_ultimo_periodo_subsidiado_desde) %></br>
 
-<p>
-  <b>Domicilio del responsable:</b>
-  <%= @func_sala.domicilio %>
-</p>
+				<%= label_tag :fecha_del_ultimo_periodo_subsidiado_hasta, 'Fecha hasta' %>
+ 				<%= @func_sala.try(:fecha_del_ultimo_periodo_subsidiado_hasta) %>
+			</div>
 
-<p>
-  <b>Localidad del responsable:</b>
-  <%= @func_sala.localidad %>
-</p>
+  <% end %> 
+	</br>
 
-<p>
-  <b>Codigo Postal del responsable:</b>
-  <%= @func_sala.codigo_postal %>
-</p>
+	 <table class="table table-bordered">
+	 	<tbody>
+		<tr>      
+			<td> <b>nombre de la sala:</b> <%= @func_sala.nombre_sala %> </td>
+			<td> Fecha de inicio:</b>  <%= @func_sala.fecha_inicio_sala %> </td>   
+			<td> </td>  
+		</tr>
+		<tr> 
+			<td> <b>Domicilio sala:</b>  <%= @func_sala.domicilio_sala %></td>
+			<td> <b>Localidad y Codigo postal:</b>  <%= @func_sala.localidad_sala %> <%= @func_sala.codigo_postal_sala %></td>     
+			<td> <b>Provincia:</b>  <%= @func_sala.provincia_sala %></td>
+		</tr>
+		<tr> 
+		    <td> <b>Nombre del responsable (en caso de persona física nombres y apellido completo y real, en caso de persona jurídica denominación comṕleta según estatuto):</b>  </td>
+			<td> <b>N° CUIT:</b>  <%= @func_sala.localidad_sala %> <%= @func_sala.codigo_postal_sala %></td>  
+			<td> </td>    
+		</tr>
+		<tr> 
+			<td> <b>Domicilio responsable:</b>  </td>
+			<td> <b>Localidad y Codigo postal:</b>  </td>     
+			<td> <b>Provincia:</b>  </td>
+		</tr>
+		<tr> 
+			<td> <b>Correo electrónico:</b>  </td>
+			<td> <b>Teléfono:</b>  </td>  
+			<td> </td>    
+		</tr>
+		</tbody>
+     </table>
 
-<p>
-  <b>Provincia del responsable:</b>
-  <%= @func_sala.provincia %>
-</p>
+	</br>
+	<p>¿Algún integrante participa en otro proyecto que haya solicitado subsidio al INT en el periodo que se solicita subsidio?</p>
+          <% @si_integrante = false 
+             @no_integrante = true        
+          if !@func_sala.integrantes_participa_proyecto_subsidio.nil? && @func_sala.integrantes_participa_proyecto_subsidio.count > 0 
+           @si_integrante = true
+           @no_integrante = false 
+          end %>
 
-<p>
-  <b>Email del responsable:</b>
-  <%= @func_sala.email %>
-</p>
+      <div class="form-inline">
+        <%= label_tag :algun_integrante_participa, 'No', :value => 'No' %>
+        <%= radio_button_tag :algun_integrante_participa, 'false', @no_integrante %>
 
-<p>
-  <b>Telefono del responsable:</b>
-  <%= @func_sala.telefono %>
-</p>
+        <%= label_tag :algun_integrante_participa, 'Si', :value => 'Si' %>
+        <%= radio_button_tag :algun_integrante_participa, 'true', @si_integrante  %> </br>
+      </div>
 
+      <% if !@func_sala.integrantes_participa_proyecto_subsidio.nil? && @func_sala.integrantes_participa_proyecto_subsidio.count > 0 %>      
+			<table class="table">
+			    <thead>
+			      <tr>      
+			        <th>Nombre y apellido integrante</th>
+			        <th>Proyecto en el que participa</th>    
+			        <th>Tipo de subsidio solicitado al INT </th>  
+			      </tr>
+			    </thead>
+			    <tbody>
+			      <%  @func_sala.integrantes_participa_proyecto_subsidio.each do |integrante| %>
+			        <tr>        
+			          <td><%= integrante.nombre_y_apellido %></td>
+			          <td><%= integrante.proyecto_en_el_que_participa %></td>    
+			          <td><%= integrante.tipo_subsidio_solicitado %></td>                                  
+			        </tr>
+			      <% end %>
+			    </tbody>
+			</table>
+      <% end %> 
+	</br>
+  <p>¿La Sala, solicitó y/o recibió otro apoyo institucional para este funcionamiento?</p>
+      <% @si = false 
+         @no = true        
+      if !@func_sala.instituciones_que_dieron_apoyo.nil? && @func_sala.instituciones_que_dieron_apoyo.count > 0 
+       @si = true
+       @no = false 
+      end %>
+      <div class="form-inline">
+        <%= label_tag :solicito_apoyo, 'No', :value => 'No' %>
+        <%= radio_button_tag :solicito_apoyo, 'false', @no %>
+        <%= label_tag :solicito_apoyo, 'Si', :value => 'Si' %>
+        <%= radio_button_tag :solicito_apoyo, 'true', @si  %> </br>
+      </div>
+
+      <% if !@func_sala.instituciones_que_dieron_apoyo.nil? && @func_sala.instituciones_que_dieron_apoyo.count > 0 %>     
+			<table class="table">
+			    <thead>
+			      <tr>      
+			        <th>Institución</th>
+			        <th>Estado del apoyo (solicitado / recibido)</th>   
+			        <th></th>   
+			      </tr>
+			    </thead>
+			    <tbody>
+			      <%  @func_sala.instituciones_que_dieron_apoyo.each do |institucion| %>
+			        <tr>        
+			          <td><%= institucion.institucion %></td>
+			          <td><%= institucion.estado_de_apoyo %></td>    
+			          <td><%= link_to 'Eliminar', funcionamiento_sala_v2_institucion_que_dieron_apoyo_path(@func_sala, institucion), method: :delete,:remote => true, data: { confirm: '¿Estas seguro?' } %></td>                                  
+			        </tr>
+			      <% end %>
+			    </tbody>
+			</table>
+      <% end %> 
+</br>
 <p>
   <b>Monto solicitado:</b>
   <%= @func_sala.monto_letra %>
@@ -105,4 +197,4 @@
 
 </br>
 </br>
-<%= link_to t('Volver'), funcionamiento_salas_path %>
+<%= link_to t('Volver'), funcionamiento_salas_v2_path %>

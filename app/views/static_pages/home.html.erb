@@ -50,6 +50,7 @@
 
     <td><%= func_sala.id %></td>
     <td><%= FuncionamientoSalaV2::ESTADOS.key(func_sala.estado)%></td>
+     <td><%= link_to "ver", funcionamiento_sala_v2_path(func_sala) %></td>
     <td><%= link_to "Editar", edit_funcionamiento_sala_v2_path(func_sala) %></td>
     <td><%= link_to "Enviar", enviar_funcionamiento_sala_v2_path(func_sala) %></td>
     <td><%= link_to 'Cancelar', func_sala, method: :delete, data: { confirm: '¿Estas seguro?' } %></td>

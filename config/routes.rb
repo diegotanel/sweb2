@@ -1,5 +1,7 @@
 Rails.application.routes.draw do  
 
+  get 'funcionamiento_salas_v2/show'
+
   get 'institucion_que_dieron_apoyo/index'
 
   resources :room_categories
@@ -26,6 +28,8 @@ Rails.application.routes.draw do
     resources :registros_plan_de_gasto_de_funcionamiento_de_sala , only: [:destroy] do
     end
     resources :integrantes_participa_proyecto_subsidio , only: [:destroy] do
+    end
+    resources :instituciones_que_dieron_apoyo, only: [:destroy] do
     end
     collection do
        post 'traer_registro_de_plan_de_gasto'

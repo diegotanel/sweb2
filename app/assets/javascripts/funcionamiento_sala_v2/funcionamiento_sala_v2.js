@@ -122,6 +122,12 @@ var ready = function() {
   cargar_evento_boton_agregar_integrante();
 
   /*****************************************************************/
+    function cargar_evento_boton_agregar_insitucion_de_apoyo()
+    {    
+      $('#agregar_institucion_de_apoyo').click(function(){
+        agregar_institucion_de_apoyo($('#institucion').val(), $('#estado_de_apoyo').val());
+      });
+    }
 
     $('#solicito_apoyo_true').change(function() {
         var urlToSubmit = ""       
@@ -135,24 +141,15 @@ var ready = function() {
         success:function(result) 
             {  
               $("#div_datos_instituciones_que_dieron_apoyo").html(result);
-               //cargar_evento_boton_agregar_integrante();
+              cargar_evento_boton_agregar_insitucion_de_apoyo();
             }
         });                                          
     });
                                 
     $('#solicito_apoyo_false').change(function() {
         $("#div_datos_instituciones_que_dieron_apoyo").html("");
-        //cargar_evento_boton_agregar_integrante();
+        cargar_evento_boton_agregar_insitucion_de_apoyo();
     });               
-
-
-
-    function cargar_evento_boton_agregar_insitucion_de_apoyo()
-    {    
-      $('#agregar_institucion_de_apoyo').click(function(){
-        agregar_institucion_de_apoyo($('#institucion').val(), $('#estado_de_apoyo').val());
-      });
-    }
 
      cargar_evento_boton_agregar_insitucion_de_apoyo();
 
