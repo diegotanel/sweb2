@@ -151,6 +151,23 @@ class FuncionamientoSalasV2Controller < ApplicationController
     end 
   end
 
+  def agregar_institucion_de_apoyo
+    funcionamiento_sala_id = params[:id]        
+    institucion = params[:institucion]
+    estado_de_apoyo = params[:estado_de_apoyo]
+
+    @func_sala = FuncionamientoSalaV2.find(funcionamiento_sala_id)
+    nuevo_registro = InstitucionQueDieronApoyo.new(institucion: institucion, estado_de_apoyo: estado_de_apoyo)
+
+    @func_sala.instituciones_que_dieron_apoyo << nuevo_registro
+          
+    #pass @reportes_a_fecha to index.html.erb and update only the tbody with id=content which takes @query
+    #render :partial => 'form_tabla_stock'
+    respond_to do |format|   
+      format.js { }
+    end 
+  end
+
 
   # def eliminar_registro__plan__de_gasto
   #   if RegistroPlanDeGastoDeFuncionamientoDeSala.find(params[:id]).destroy

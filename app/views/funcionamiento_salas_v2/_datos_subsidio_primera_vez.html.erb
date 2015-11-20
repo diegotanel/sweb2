@@ -1,18 +1,25 @@
 <p>¿Recibió en el período inmediato anterior?</p>
+  <div>
+    <% @recibio = @func_sala.try(:recibio_subsidio_en_el_periodo_inmediatamente_anterior) %>
+    <% [ 'true', 'false' ].each do |recibio| %>
+      <%= radio_button_tag :recibio_subsidio_en_el_periodo_inmediatamente_anterior, recibio, @recibio.to_s == recibio, id: 'funcionamiento_sala_v2_recibio_subsidio_en_el_periodo_inmediatamente_anterior', name:'funcionamiento_sala_v2[recibio_subsidio_en_el_periodo_inmediatamente_anterior]'%>
+      <% if recibio == 'true' %>
+        <%= 'Si' %>
+      <% else %>
+        <%= 'No' %>
+      <% end %>
+    <% end %>
+  </div>
 
+</br>
+<p>Fecha del último periodo subsidiado</p>
 <div class="form-inline">
-	<%= label_tag :recibio_subsidio_en_el_periodo_inmediatamente_anterior, 'No', :value => 'No' %>
-	<%= radio_button_tag :recibio_subsidio_en_el_periodo_inmediatamente_anterior, 'No', :checked => @func_sala.try(:recibio_subsidio_en_el_periodo_inmediatamente_anterior), id: 'funcionamiento_sala_v2_recibio_subsidio_en_el_periodo_inmediatamente_anterior'%>
+	<%= label_tag :fecha_del_ultimo_periodo_subsidiado_desde, "Desde" %>      
+	<%= date_field_tag :fecha_del_ultimo_periodo_subsidiado_desde, nil, id: 'funcionamiento_sala_v2_fecha_del_ultimo_periodo_subsidiado_desde', name: 'funcionamiento_sala_v2[fecha_del_ultimo_periodo_subsidiado_desde]', class: "input-small",  :value => @func_sala.try(:fecha_del_ultimo_periodo_subsidiado_desde) %>
 
-	<%= label_tag :recibio_subsidio_en_el_periodo_inmediatamente_anterior, 'Si', :value => 'Si' %>
-	<%= radio_button_tag :recibio_subsidio_en_el_periodo_inmediatamente_anterior, 'Si', :checked => @func_sala.try(:recibio_subsidio_en_el_periodo_inmediatamente_anterior), id: 'funcionamiento_sala_v2_recibio_subsidio_en_el_periodo_inmediatamente_anterior' %></br>
+	<%= label_tag :fecha_del_ultimo_periodo_subsidiado_hasta, "Hasta" %>
+	<%= date_field_tag :fecha_del_ultimo_periodo_subsidiado_hasta, nil, id: 'funcionamiento_sala_v2_fecha_del_ultimo_periodo_subsidiado_hasta', name: 'funcionamiento_sala_v2[fecha_del_ultimo_periodo_subsidiado_hasta]', class: "input-small",  :value => @func_sala.try(:fecha_del_ultimo_periodo_subsidiado_hasta) %> 
 </div>
+</br>
 
-<div class="form-inline">
-	<%= label_tag :fecha_del_ultimo_periodo_subsidiado_desde, "Fecha desde" %>      
-	<%= text_field_tag :fecha_del_ultimo_periodo_subsidiado_desde, nil, id: 'funcionamiento_sala_v2_fecha_del_ultimo_periodo_subsidiado_desde', name: 'funcionamiento_sala_v2[fecha_del_ultimo_periodo_subsidiado_desde]', class: "input-small",  :value => @func_sala.try(:fecha_del_ultimo_periodo_subsidiado_desde) %>
-
-	<%= label_tag :fecha_del_ultimo_periodo_subsidiado_hasta, "Fecha hasta" %>
-	<%= text_field_tag :fecha_del_ultimo_periodo_subsidiado_hasta, nil, id: 'funcionamiento_sala_v2_fecha_del_ultimo_periodo_subsidiado_hasta', name: 'funcionamiento_sala_v2[fecha_del_ultimo_periodo_subsidiado_hasta]', class: "input-small",  :value => @func_sala.try(:fecha_del_ultimo_periodo_subsidiado_hasta) %> 
-</div>
 

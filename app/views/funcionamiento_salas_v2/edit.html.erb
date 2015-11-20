@@ -6,25 +6,8 @@
   <div class="span6 offset3">
     <%= form_for @func_sala do |f| %>
       <%= render 'shared/error_messages', :object => f.object %>
-      <%= f.label :nombre_sala, "Nombre de la sala / espacio teatral" %>
-      <%= f.text_field :nombre_sala %>
 
       <%= f.hidden_field :id %>
-
-      <%= f.label :fecha_inicio_sala,"Fecha de inicio"  %>
-      <%= f.text_field :fecha_inicio_sala %>  
-
-      <%= f.label :domicilio_sala, "Domicilio de la sala" %>
-      <%= f.text_field :domicilio_sala %>
-
-      <%= f.label :localidad_sala, "Localidad de la sala" %>
-      <%= f.text_field :localidad_sala %>
-
-      <%= f.label :codigo_postal_sala, "Codigo Postal de la sala" %>
-      <%= f.text_field :codigo_postal_sala %>
-
-      <%= f.label :provincia_sala, "Provincia de la sala" %>
-      <%= f.text_field :provincia_sala %>
 
       <%= f.label :descripcion_proyecto, "Descripción del proyecto previsto y objetivos principales" %>
       <%= f.text_area :descripcion_proyecto %>
@@ -33,7 +16,7 @@
       <%= f.text_area :descripcion_estrategias %></br>
 
       <div class="form-inline">
-      <p>Registros de plan de pagos:</p>
+      <p>Detalle del plan de gastos total del funcionamiento (discriminado por rubros):</p>
         <%= label_tag :rubro %>
         <%= text_field_tag :rubro, nil,  class: "input-small" %>
         <%= label_tag :monto %>
@@ -71,83 +54,7 @@
           </table>
           <br>
         <% end %>
-      </div>       
-
-      <p>¿Solicita subsidio por primera vez?</p>
-      <div class="form-inline">
-          <% @si = true %>
-          <% @no = false %>
-        <% unless @func_sala.try(:solicitud_de_subsidio_por_primera_vez) %>
-          <% @si = false %>
-          <% @no = true %>
-        <% end %>
-          <%= f.label :solicitud_de_subsidio_por_primera_vez, 'No', :value => 'No'%>
-          <%= f.radio_button :solicitud_de_subsidio_por_primera_vez, 'false', :checked => @no %>
-          <%= f.label :solicitud_de_subsidio_por_primera_vez, 'Si', :value => 'Si' %>
-          <%= f.radio_button :solicitud_de_subsidio_por_primera_vez, 'true', :checked => @si %>
       </div>
-
-      <% unless @func_sala.solicitud_de_subsidio_por_primera_vez %>        
-            <div id="div_datos_subsidio_primera_vez" class="span6 offset1"> 
-               <%= render 'datos_subsidio_primera_vez', :object => f.object %>
-            </div>
-        <% else %>
-            <div id="div_datos_subsidio_primera_vez" class="span6 offset1">
-            </div>
-            <br>
-      <% end %> 
-
-      <p>¿Algún integrante participa en otro proyecto que haya solicitado subsidio al INT en el periodo que se solicita subsidio?</p>
-          <% @si_integrante = false 
-             @no_integrante = true        
-          if !@func_sala.integrantes_participa_proyecto_subsidio.nil? && @func_sala.integrantes_participa_proyecto_subsidio.count > 0 
-           @si_integrante = true
-           @no_integrante = false 
-          end %>
-
-      <div class="form-inline">
-        <%= label_tag :algun_integrante_participa, 'No', :value => 'No' %>
-        <%= radio_button_tag :algun_integrante_participa, 'false', @no_integrante %>
-
-        <%= label_tag :algun_integrante_participa, 'Si', :value => 'Si' %>
-        <%= radio_button_tag :algun_integrante_participa, 'true', @si_integrante  %> </br>
-      </div>
-
-      <% if !@func_sala.integrantes_participa_proyecto_subsidio.nil? && @func_sala.integrantes_participa_proyecto_subsidio.count > 0 %>      
-          <div id="div_datos_integrantes_que_participan_en_otro_proyecto"> 
-             <%= render "datos_integrantes_que_participan_en_otro_proyecto", :object => f.object  %> 
-          </div>
-      <% else %>
-          <div id="div_datos_integrantes_que_participan_en_otro_proyecto">
-          </div>
-          <br>
-      <% end %> 
-
-      <p>¿La Sala, solicitó y/o recibió otro apoyo institucional para este funcionamiento?</p>
-      <% @si = false 
-         @no = true        
-      if !@func_sala.instituciones_que_dieron_apoyo.nil? && @func_sala.instituciones_que_dieron_apoyo.count > 0 
-       @si = true
-       @no = false 
-      end %>
-
-      <div class="form-inline">
-        <%= label_tag :solicito_apoyo, 'No', :value => 'No' %>
-        <%= radio_button_tag :solicito_apoyo, 'false', @no %>
-
-        <%= label_tag :solicito_apoyo, 'Si', :value => 'Si' %>
-        <%= radio_button_tag :solicito_apoyo, 'true', @si  %> </br>
-      </div>
-
-      <% if !@func_sala.instituciones_que_dieron_apoyo.nil? && @func_sala.instituciones_que_dieron_apoyo.count > 0 %>      
-          <div id="div_datos_instituciones_que_dieron_apoyo"> 
-             <%= render "datos_instituciones_que_dieron_apoyo", :object => f.object  %> 
-          </div>
-      <% else %>
-          <div id="div_datos_instituciones_que_dieron_apoyo">
-          </div>
-          <br>
-      <% end %> 
 
       <p>Monto solicitado al Instituto Nacional del Teatro</p>
 
@@ -158,10 +65,81 @@
       <%= f.text_field :monto_numero %>
       </br>
 
+      <p>¿Solicita subsidio por primera vez?</p>
+      <div>
+        <% @solicitud = @func_sala.try(:solicitud_de_subsidio_por_primera_vez) %>
+        <% [ 'true', 'false' ].each do |solicitud| %>
+          <%= f.radio_button :solicitud_de_subsidio_por_primera_vez, solicitud, :checked => @solicitud.to_s == solicitud %>
+          <% if solicitud == 'true' %>
+            <%= 'Si' %>
+          <% else %>
+            <%= 'No' %>
+          <% end %>
+        <% end %>
+      </div>
+
+       <% if !@func_sala.solicitud_de_subsidio_por_primera_vez.nil? && !@func_sala.try(:solicitud_de_subsidio_por_primera_vez) %>
+            <div id="div_datos_subsidio_primera_vez" class="span6 offset1"> 
+               <%= render 'datos_subsidio_primera_vez', :object => f.object %>
+            </div>
+        <% else %>
+            <div id="div_datos_subsidio_primera_vez" class="span6 offset1">
+            </div>
+            <br>
+      <% end %> 
+
+      <p>¿Algún integrante participa en otro proyecto que haya solicitado subsidio al INT en el periodo que se solicita subsidio?</p>
+
+      <div>
+        <% @participa = @func_sala.try(:algun_integrante_participa) %>
+        <% [ 'true', 'false' ].each do |participa| %>
+          <%= f.radio_button :algun_integrante_participa, participa, :checked => @participa.to_s == participa %>
+          <% if participa == 'true' %>
+            <%= 'Si' %>
+          <% else %>
+            <%= 'No' %>
+          <% end %>
+        <% end %>
+      </div>
+
+      <% if @func_sala.try(:algun_integrante_participa) %>      
+          <div id="div_datos_integrantes_que_participan_en_otro_proyecto"> 
+             <%= render "datos_integrantes_que_participan_en_otro_proyecto", :object => f.object  %> 
+          </div>
+      <% else %>
+          <div id="div_datos_integrantes_que_participan_en_otro_proyecto">
+          </div>
+          <br>
+      <% end %> 
+
+      <p>¿La Sala, solicitó y/o recibió otro apoyo institucional para este funcionamiento?</p>
+
+      <div>
+        <% @solicito = @func_sala.try(:solicito_apoyo) %> 
+        <% [ 'true', 'false' ].each do |solicito| %>
+          <%= f.radio_button :solicito_apoyo, solicito, :checked => @solicito.to_s == solicito %>
+          <% if solicito == 'true' %>
+            <%= 'Si' %>
+          <% else %>
+            <%= 'No' %>
+          <% end %>
+        <% end %>
+      </div>
+
+       <% if @func_sala.try(:solicito_apoyo) %>            
+          <div id="div_datos_instituciones_que_dieron_apoyo"> 
+             <%= render "datos_instituciones_que_dieron_apoyo", :object => f.object  %> 
+          </div>
+      <% else %>
+          <div id="div_datos_instituciones_que_dieron_apoyo">
+          </div>
+          <br>
+      <% end %> 
+
       <%= f.submit "Confirmar Cambios", class: "btn btn-large btn-primary" %>
     <% end %>
   </div>
 </div>
 </br>
 </br>
-<%= link_to t('Volver'), funcionamiento_salas_path %>
+<%= link_to t('Volver'), root_path %>

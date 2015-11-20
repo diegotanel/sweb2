@@ -11,6 +11,8 @@ class CreateFuncionamientoSalasV2 < ActiveRecord::Migration
       t.date :fecha_inicio_periodo_de_subsidio
       t.boolean :solicitud_de_subsidio_por_primera_vez
       t.boolean :recibio_subsidio_en_el_periodo_inmediatamente_anterior
+      t.boolean :algun_integrante_participa 
+      t.boolean :solicito_apoyo
       t.date :fecha_del_ultimo_periodo_subsidiado_desde
       t.date :fecha_del_ultimo_periodo_subsidiado_hasta
       t.text :descripcion_proyecto

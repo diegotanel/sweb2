@@ -11,6 +11,9 @@ es-AR:
       default: ! '%d/%m/%Y %H:%M'
       short: ! '%d/%m/%Y'
       con_seg: ! '%d/%m/%Y %H:%M:%S'
+  date:
+    formats:
+      default: ! '%d/%m/%Y'
   activerecord:
     attributes:
         user: Usuario

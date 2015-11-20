@@ -36,12 +36,20 @@ var ready = function() {
             //BlanquearCampos();
             $('#titulo').html("<b> Registros de plan de pagos </b>");
             $('#tabla_registro_de_pagos').html(data);
+            limpiar_rubro_y_monto();
+
       },
       error: function (request, status, error) 
           {             
             alert("Hay campos inválidos ingresados. Ha ocurrido un error");
           }
     });       
+  }
+
+    function limpiar_rubro_y_monto()
+  {            
+      $('#monto').val("");
+      $('#rubro').val("");
   }
   
    $('#funcionamiento_sala_v2_solicitud_de_subsidio_por_primera_vez_false').change(function() {
@@ -69,7 +77,7 @@ var ready = function() {
     /*************************************************************/
 
 
-    $('#algun_integrante_participa_true').change(function() {
+    $('#funcionamiento_sala_v2_algun_integrante_participa_true').change(function() {
         var urlToSubmit = ""       
         var partial_name = "datos_integrantes_que_participan_en_otro_proyecto";
         //$( ".fields_nacionalidad" ).remove(); 
@@ -86,7 +94,7 @@ var ready = function() {
         });                                          
     });
                                 
-    $('#algun_integrante_participa_false').change(function() {
+    $('#funcionamiento_sala_v2_algun_integrante_participa_false').change(function() {
         $("#div_datos_integrantes_que_participan_en_otro_proyecto").html("");
          cargar_evento_boton_agregar_integrante();
     });               
@@ -118,7 +126,6 @@ var ready = function() {
           agregar_integrante_proyecto_subsidio($('#nombre_y_apellido').val(), $('#proyecto_en_el_que_participa').val(), $('#tipo_subsidio_solicitado').val());
     });
   }
-
   cargar_evento_boton_agregar_integrante();
 
   /*****************************************************************/
@@ -129,7 +136,9 @@ var ready = function() {
       });
     }
 
-    $('#solicito_apoyo_true').change(function() {
+    cargar_evento_boton_agregar_insitucion_de_apoyo();
+
+    $('#funcionamiento_sala_v2_solicito_apoyo_true').change(function() {
         var urlToSubmit = ""       
         var partial_name = "datos_instituciones_que_dieron_apoyo";
 
@@ -146,12 +155,9 @@ var ready = function() {
         });                                          
     });
                                 
-    $('#solicito_apoyo_false').change(function() {
+    $('#funcionamiento_sala_v2_solicito_apoyo_false').change(function() {
         $("#div_datos_instituciones_que_dieron_apoyo").html("");
-        cargar_evento_boton_agregar_insitucion_de_apoyo();
     });               
-
-     cargar_evento_boton_agregar_insitucion_de_apoyo();
 
     function agregar_institucion_de_apoyo(institucion, estado_de_apoyo)
     {   
@@ -164,7 +170,7 @@ var ready = function() {
         success: function(data){
               //BlanquearCampos();
               $('#div_datos_instituciones_que_dieron_apoyo').html(data);
-                //cargar_evento_boton_agregar_insitucion_de_apoyo();
+               cargar_evento_boton_agregar_insitucion_de_apoyo();
         },
         error: function (request, status, error) 
             {             
@@ -172,6 +178,12 @@ var ready = function() {
             }
       });       
     }
+
+    
+    $('#eliminar_institucion_apoyo').click(function(){
+      alert("hola");
+      cargar_evento_boton_agregar_insitucion_de_apoyo();
+     });
               
 };
 

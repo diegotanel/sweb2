@@ -18,7 +18,7 @@
         <tr>        
           <td><%= institucion.institucion %></td>
           <td><%= institucion.estado_de_apoyo %></td>    
-          <td><%= link_to 'Eliminar', funcionamiento_sala_v2_institucion_que_dieron_apoyo_path(@func_sala, institucion), method: :delete,:remote => true, data: { confirm: '¿Estas seguro?' } %></td>                                  
+          <td><%= link_to 'Eliminar', funcionamiento_sala_v2_institucion_que_dieron_apoyo_path(@func_sala, institucion), method: :delete,:remote => true, data: { confirm: '¿Estas seguro?' }, id:"eliminar_institucion_apoyo" %></td>                                  
         </tr>
       <% end %>
     </tbody>
