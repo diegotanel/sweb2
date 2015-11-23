@@ -1,6 +1,6 @@
 #encoding: utf-8
 <% provide(:title, 'Editar formulario de solicitud de subsidio funcionamiento de sala o espacio de teatro independiente V2') %>
-<h1>Actualización de formulario de solicitud de subsidio funcionamiento de sala o espacio de teatro independiente V2</h1>
+<h1>Solicitud de subsidio funcionamiento de sala o espacio de teatro independiente V2</h1>
 
 <div class="row">
   <div class="span6 offset3">
@@ -8,63 +8,7 @@
       <%= render 'shared/error_messages', :object => f.object %>
 
       <%= f.hidden_field :id %>
-
-      <%= f.label :descripcion_proyecto, "Descripción del proyecto previsto y objetivos principales" %>
-      <%= f.text_area :descripcion_proyecto %>
-
-      <%= f.label :descripcion_estrategias, "Descripción de las estrategias" %>
-      <%= f.text_area :descripcion_estrategias %></br>
-
-      <div class="form-inline">
-      <p>Detalle del plan de gastos total del funcionamiento (discriminado por rubros):</p>
-        <%= label_tag :rubro %>
-        <%= text_field_tag :rubro, nil,  class: "input-small" %>
-        <%= label_tag :monto %>
-        <%= text_field_tag :monto, nil, class: "input-small"%> 
-        <input type="button" value="Agregar" id="agregar_registro_de_plan", class="input-small"> </br>
-      </div>
       </br>
-
-      <div id="tabla_registro_de_pagos"> 
-        <% if !@func_sala.registros_plan_de_gasto_de_funcionamiento_de_sala.nil? && @func_sala.registros_plan_de_gasto_de_funcionamiento_de_sala.length > 0 %>
-        <table class="table">
-            <thead>
-              <tr>      
-                <th>Rubro</th>
-                <th>Monto</th>    
-                <th>Acción</th>  
-              </tr>
-            </thead>
-            <tbody>
-              <% @func_sala.registros_plan_de_gasto_de_funcionamiento_de_sala.each do |registro| %>
-                <tr>        
-                  <td><%= registro.rubro %></td>
-                  <td><%= registro.monto %></td>    
-                  <td><%= link_to 'Eliminar', funcionamiento_sala_v2_registro_plan_de_gasto_de_funcionamiento_de_sala_path(@func_sala, registro), method: :delete,:remote => true, data: { confirm: '¿Estas seguro?' } %></td>      
-                </tr>
-              <% end %>
-            </tbody>
-            <tfoot>
-                <tr>  
-                  <td>TOTAL</td>
-                  <td><%= @func_sala.registros_plan_de_gasto_de_funcionamiento_de_sala.sum(:monto) %></td> 
-                </tr> 
-            </tfoot>
-
-          </table>
-          <br>
-        <% end %>
-      </div>
-
-      <p>Monto solicitado al Instituto Nacional del Teatro</p>
-
-      <%= f.label :monto_letra, "Son Pesos" %>
-      <%= f.text_field :monto_letra %>
-
-      <%= f.label :monto_numero, "$ (en números)" %>
-      <%= f.text_field :monto_numero %>
-      </br>
-
       <p>¿Solicita subsidio por primera vez?</p>
       <div>
         <% @solicitud = @func_sala.try(:solicitud_de_subsidio_por_primera_vez) %>
@@ -86,9 +30,9 @@
             <div id="div_datos_subsidio_primera_vez" class="span6 offset1">
             </div>
             <br>
-      <% end %> 
+      <% end %>
 
-      <p>¿Algún integrante participa en otro proyecto que haya solicitado subsidio al INT en el periodo que se solicita subsidio?</p>
+            <p>¿Algún integrante participa en otro proyecto que haya solicitado subsidio al INT en el periodo que se solicita subsidio?</p>
 
       <div>
         <% @participa = @func_sala.try(:algun_integrante_participa) %>
@@ -135,6 +79,62 @@
           </div>
           <br>
       <% end %> 
+
+      <%= f.label :descripcion_proyecto, "Descripción del proyecto previsto y objetivos principales" %>
+      <%= f.text_area :descripcion_proyecto %>
+
+      <%= f.label :descripcion_estrategias, "Descripción de las estrategias" %>
+      <%= f.text_area :descripcion_estrategias %></br>
+
+      <div class="form-inline">
+      <p>Detalle del plan de gastos total del funcionamiento (discriminado por rubros):</p>
+        <%= label_tag :rubro %>
+        <%= text_field_tag :rubro, nil,  class: "input-small" %>
+        <%= label_tag :monto, 'Monto anual (en números)' %>
+        <%= text_field_tag :monto, nil, class: "input-small"%> 
+        <input type="button" value="Agregar" id="agregar_registro_de_plan", class="input-small"> </br>
+      </div>
+      </br>
+
+      <div id="tabla_registro_de_pagos"> 
+        <% if !@func_sala.registros_plan_de_gasto_de_funcionamiento_de_sala.nil? && @func_sala.registros_plan_de_gasto_de_funcionamiento_de_sala.length > 0 %>
+        <table class="table">
+            <thead>
+              <tr>      
+                <th>Rubro</th>
+                <th>Monto</th>    
+                <th>Acción</th>  
+              </tr>
+            </thead>
+            <tbody>
+              <% @func_sala.registros_plan_de_gasto_de_funcionamiento_de_sala.each do |registro| %>
+                <tr>        
+                  <td><%= registro.rubro %></td>
+                  <td><%= registro.monto %></td>    
+                  <td><%= link_to 'Eliminar', funcionamiento_sala_v2_registro_plan_de_gasto_de_funcionamiento_de_sala_path(@func_sala, registro), method: :delete,:remote => true, data: { confirm: '¿Estas seguro?' } %></td>      
+                </tr>
+              <% end %>
+            </tbody>
+            <tfoot>
+                <tr>  
+                  <td>TOTAL</td>
+                  <td><%= @func_sala.registros_plan_de_gasto_de_funcionamiento_de_sala.sum(:monto) %></td> 
+                </tr> 
+            </tfoot>
+
+          </table>
+          <br>
+        <% end %>
+      </div>
+
+      <p>Monto solicitado al Instituto Nacional del Teatro</p>
+
+      <%= f.label :monto_letra, "Son Pesos (en letras)" %>
+      <%= f.text_field :monto_letra %>
+
+      <%= f.label :monto_numero, "$ (en números)" %>
+      <%= f.text_field :monto_numero %>
+      </br>
 
       <%= f.submit "Confirmar Cambios", class: "btn btn-large btn-primary" %>
     <% end %>

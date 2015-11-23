@@ -1,7 +1,7 @@
 <%= label_tag :institucion, 'Institución' %>
 <%= text_field_tag :institucion %><br>
 
-<%= label_tag :estado_de_apoyo, 'Estado del apoyo' %>
+<%= label_tag :estado_de_apoyo, 'Estado del apoyo (solicitado / recibido)' %>
 <%= text_field_tag :estado_de_apoyo %><br>
 
 <input type="button" value="Agregar" id="agregar_institucion_de_apoyo", class="input-small"> </br>
@@ -9,7 +9,7 @@
     <thead>
       <tr>      
         <th>Institución</th>
-        <th>Estado del apoyo (solicitado / recibido)</th>   
+        <th>Estado del apoyo</th>   
         <th></th>   
       </tr>
     </thead>
