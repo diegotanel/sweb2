@@ -11,7 +11,7 @@
       <% @func_sala.registros_plan_de_gasto_de_funcionamiento_de_sala.each do |registro| %>
         <tr>        
           <td><%= registro.rubro %></td>
-          <td><%= registro.monto %></td>    
+          <td><%= number_to_currency(registro.monto) %></td>    
           <td><%= link_to 'Eliminar', funcionamiento_sala_v2_registro_plan_de_gasto_de_funcionamiento_de_sala_path(@func_sala, registro), method: :delete,:remote => true, data: { confirm: '¿Estas seguro?' } %></td>      
         </tr>
       <% end %>
@@ -20,7 +20,7 @@
     <tfoot>
         <tr>  
           <td>TOTAL</td>
-          <td><%= @func_sala.registros_plan_de_gasto_de_funcionamiento_de_sala.sum(:monto) %></td> 
+          <td><%= number_to_currency(@func_sala.registros_plan_de_gasto_de_funcionamiento_de_sala.sum(:monto)) %></td> 
         </tr> 
     </tfoot>
 
