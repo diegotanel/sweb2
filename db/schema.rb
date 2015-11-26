@@ -112,6 +112,7 @@ ActiveRecord::Schema.define(version: 20151116184127) do
     t.boolean  "solicito_apoyo"
     t.date     "fecha_del_ultimo_periodo_subsidiado_desde"
     t.date     "fecha_del_ultimo_periodo_subsidiado_hasta"
+    t.date     "fecha_de_inicio_del_periodo_por_el_que_solicita_subsidio"
     t.text     "descripcion_proyecto"
     t.text     "descripcion_estrategias"
     t.text     "detalle_plan_gastos"
@@ -127,8 +128,8 @@ ActiveRecord::Schema.define(version: 20151116184127) do
     t.string   "monto_letra"
     t.string   "monto_numero"
     t.integer  "estado"
-    t.datetime "created_at",                                             null: false
-    t.datetime "updated_at",                                             null: false
+    t.datetime "created_at",                                               null: false
+    t.datetime "updated_at",                                               null: false
   end
 
   create_table "hotels", force: :cascade do |t|
@@ -139,7 +140,7 @@ ActiveRecord::Schema.define(version: 20151116184127) do
 
   create_table "instituciones_que_dieron_apoyo", force: :cascade do |t|
     t.string   "institucion"
-    t.string   "estado_de_apoyo"
+    t.integer  "estado"
     t.integer  "funcionamiento_sala_v2_id"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
@@ -164,7 +165,9 @@ ActiveRecord::Schema.define(version: 20151116184127) do
   add_index "integrantes_asist_tec", ["asist_tec_id"], name: "index_integrantes_asist_tec_on_asist_tec_id"
 
   create_table "integrantes_participa_proyecto_subsidio", force: :cascade do |t|
-    t.string   "nombre_y_apellido"
+    t.string   "nombre"
+    t.string   "apellido"
+    t.string   "dni"
     t.string   "proyecto_en_el_que_participa"
     t.string   "tipo_subsidio_solicitado"
     t.integer  "funcionamiento_sala_v2_id"

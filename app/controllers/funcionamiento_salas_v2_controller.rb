@@ -43,41 +43,6 @@ class FuncionamientoSalasV2Controller < ApplicationController
     end
   end
 
-  # def create
-
-  #   params[:funcionamiento_sala][:fecha_inicio] = DateTime.now
-  #   params[:funcionamiento_sala][:nombre] = "gonzalo"
-  #   params[:funcionamiento_sala][:apellido] = "santander"
-  #   params[:funcionamiento_sala][:num_cuit] = "20288034363"
-  #   params[:funcionamiento_sala][:domicilio] = "carlos calvo 2345"
-  #   params[:funcionamiento_sala][:localidad] = "ciudadela"
-  #   params[:funcionamiento_sala][:codigo_postal] = "1702"
-  #   params[:funcionamiento_sala][:provincia] = "buenos aires"
-  #   params[:funcionamiento_sala][:email] = "gsantacruz@gmail.com"
-  #   params[:funcionamiento_sala][:telefono] = "46535689"
-
-  #   @func_sala = FuncionamientoSalaV2.new(func_sala_params)     
-    
-    
-  #   @func_sala.saltear_validaciones_de_presencia = true
-
-  #   if @func_sala.save
-  #     @tramite = current_user.tramites.create!()
-  #     @tramite.tramitable = @func_sala
-  #     if @tramite.save
-  #         flash[:success] = "Solicitud correctamente creada"
-  #         redirect_to funcionamiento_sala_path(@func_sala)
-  #     else
-  #         cargar_datos_func_sala          
-  #         #render :partial => "/funcionamiento_sala/_form_funcionamiento_sala"
-  #         format.html { render :new }
-  #     end
-  #   else
-  #     cargar_datos_func_sala  
-  #     render 'new'      
-  #   end
-  # end
-
   def edit
     @func_sala = FuncionamientoSalaV2.find(params[:id])
   end
@@ -135,12 +100,14 @@ class FuncionamientoSalasV2Controller < ApplicationController
   
   def agregar_integrante_proyecto_subsidio
     funcionamiento_sala_id = params[:id]        
-    nombre_y_apellido = params[:nombre_y_apellido]
+    nombre = params[:nombre]
+    apellido = params[:apellido]
+    dni = params[:dni]
     proyecto_en_el_que_participa = params[:proyecto_en_el_que_participa]
     tipo_de_subsidio = params[:tipo_de_subsidio]
 
     @func_sala = FuncionamientoSalaV2.find(funcionamiento_sala_id)
-    nuevo_registro = IntegranteParticipaProyectoSubsidio.new(nombre_y_apellido: nombre_y_apellido, proyecto_en_el_que_participa: proyecto_en_el_que_participa, tipo_subsidio_solicitado: tipo_de_subsidio)
+    nuevo_registro = IntegranteParticipaProyectoSubsidio.new(nombre: nombre, apellido: apellido, dni: dni, proyecto_en_el_que_participa: proyecto_en_el_que_participa, tipo_subsidio_solicitado: tipo_de_subsidio)
 
     @func_sala.integrantes_participa_proyecto_subsidio << nuevo_registro
           
@@ -154,10 +121,10 @@ class FuncionamientoSalasV2Controller < ApplicationController
   def agregar_institucion_de_apoyo
     funcionamiento_sala_id = params[:id]        
     institucion = params[:institucion]
-    estado_de_apoyo = params[:estado_de_apoyo]
+    estado = params[:estado]
 
     @func_sala = FuncionamientoSalaV2.find(funcionamiento_sala_id)
-    nuevo_registro = InstitucionQueDieronApoyo.new(institucion: institucion, estado_de_apoyo: estado_de_apoyo)
+    nuevo_registro = InstitucionQueDieronApoyo.new(institucion: institucion, estado: estado )
 
     @func_sala.instituciones_que_dieron_apoyo << nuevo_registro
           
@@ -168,16 +135,6 @@ class FuncionamientoSalasV2Controller < ApplicationController
     end 
   end
 
-
-  # def eliminar_registro__plan__de_gasto
-  #   if RegistroPlanDeGastoDeFuncionamientoDeSala.find(params[:id]).destroy
-  #     flash[:success] = "Solicitud eliminada"
-  #     redirect_to funcionamiento_salas_path
-  #   else
-  #     flash.now[:failure] = "La solicitud no puede ser eliminada"
-  #     render 'index'
-  #   end
-  # end
 
   def pegar_form_datos_subsidio_primera_vez
       partial = params[:partial_name]

@@ -3,6 +3,8 @@ var ready = function() {
   setear_control_fecha("funcionamiento_sala_v2_fecha_inicio_sala");
   setear_control_fecha("funcionamiento_sala_v2_fecha_del_ultimo_periodo_subsidiado_desde");
   setear_control_fecha("funcionamiento_sala_v2_fecha_del_ultimo_periodo_subsidiado_hasta");
+  setear_control_fecha("funcionamiento_sala_v2_fecha_de_inicio_del_periodo_por_el_que_solicita_subsidio");
+  
 
 
   function setear_control_fecha(nombre_control) 
@@ -100,14 +102,14 @@ var ready = function() {
     });               
 
 
-    function agregar_integrante_proyecto_subsidio(nombre_y_apellido, proyecto_en_el_que_participa, tipo_de_subsidio)
+    function agregar_integrante_proyecto_subsidio(nombre, apellido, dni, proyecto_en_el_que_participa, tipo_de_subsidio)
     {   
     urlToSubmit = "/funcionamiento_salas_v2/"+$('#funcionamiento_sala_v2_id').val()+"/agregar_integrante_proyecto_subsidio"  
     $.ajax({
       type: "post",
       dataType: "json",
       url: urlToSubmit,      
-      data: { nombre_y_apellido: nombre_y_apellido, proyecto_en_el_que_participa: proyecto_en_el_que_participa, tipo_de_subsidio: tipo_de_subsidio },        
+      data: { nombre: nombre, apellido: apellido, dni: dni, proyecto_en_el_que_participa: proyecto_en_el_que_participa, tipo_de_subsidio: tipo_de_subsidio },        
       success: function(data){
             //BlanquearCampos();
             $('#div_datos_integrantes_que_participan_en_otro_proyecto').html(data);
@@ -123,16 +125,24 @@ var ready = function() {
   function cargar_evento_boton_agregar_integrante()
   {    
     $('#agregar_integrante_proyecto_subsidio').click(function(){
-          agregar_integrante_proyecto_subsidio($('#nombre_y_apellido').val(), $('#proyecto_en_el_que_participa').val(), $('#tipo_subsidio_solicitado').val());
+          agregar_integrante_proyecto_subsidio($('#nombre').val(),$('#apellido').val(), $('#dni').val(),$('#proyecto_en_el_que_participa').val(), $('#tipo_subsidio_solicitado').val());
     });
   }
   cargar_evento_boton_agregar_integrante();
 
   /*****************************************************************/
+
     function cargar_evento_boton_agregar_insitucion_de_apoyo()
-    {    
+    {
       $('#agregar_institucion_de_apoyo').click(function(){
-        agregar_institucion_de_apoyo($('#institucion').val(), $('#estado_de_apoyo').val());
+        var valorSeleccionado = 0
+        $("#estado_seleccionado").children('input').each(function () 
+          {
+            if (this.checked) {
+              valorSeleccionado = this.value;
+            }
+          });
+        agregar_institucion_de_apoyo($('#institucion').val(), valorSeleccionado);
       });
     }
 
@@ -159,32 +169,26 @@ var ready = function() {
         $("#div_datos_instituciones_que_dieron_apoyo").html("");
     });               
 
-    function agregar_institucion_de_apoyo(institucion, estado_de_apoyo)
+    function agregar_institucion_de_apoyo(institucion, estado)
     {   
       urlToSubmit = "/funcionamiento_salas_v2/"+$('#funcionamiento_sala_v2_id').val()+"/agregar_institucion_de_apoyo"  
       $.ajax({
         type: "post",
         dataType: "json",
         url: urlToSubmit,      
-        data: { institucion: institucion, estado_de_apoyo: estado_de_apoyo },        
+        data: { institucion: institucion, estado: estado},        
         success: function(data){
-              //BlanquearCampos();
-              $('#div_datos_instituciones_que_dieron_apoyo').html(data);
-               cargar_evento_boton_agregar_insitucion_de_apoyo();
+            //BlanquearCampos();
+            $('#div_datos_instituciones_que_dieron_apoyo').html(data);
+              cargar_evento_boton_agregar_insitucion_de_apoyo();
         },
         error: function (request, status, error) 
             {             
               alert("Hay campos inválidos ingresados. Ha ocurrido un error");
             }
       });       
-    }
+    }     
 
-    
-    $('#eliminar_institucion_apoyo').click(function(){
-      alert("hola");
-      cargar_evento_boton_agregar_insitucion_de_apoyo();
-     });
-              
 };
 
 $(document).ready(ready);

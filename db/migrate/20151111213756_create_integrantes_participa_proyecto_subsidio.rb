@@ -1,7 +1,9 @@
 class CreateIntegrantesParticipaProyectoSubsidio < ActiveRecord::Migration
   def change
     create_table :integrantes_participa_proyecto_subsidio do |t|
-      t.string :nombre_y_apellido
+      t.string :nombre
+      t.string :apellido
+      t.string :dni
       t.string :proyecto_en_el_que_participa
       t.string :tipo_subsidio_solicitado
       t.references :funcionamiento_sala_v2

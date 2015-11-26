@@ -11,6 +11,7 @@ class FuncionamientoSalaV2 < ActiveRecord::Base
 
 	default_scope -> { order('created_at DESC') }
 	ESTADOS = {:enviado => 1, :borrador => 2 }
+  ESTADO_DEL_APOYO = {:solicitado => 1, :recibido => 2 }
 	#before_save { self.email = email.downcase }
  	 VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(?:\.[a-z\d\-]+)*\.[a-z]+\z/i
 

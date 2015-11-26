@@ -1,5 +1,11 @@
-<%= label_tag :nombre_y_apellido, 'Nombre y apellido' %>
-<%= text_field_tag :nombre_y_apellido %><br>
+<%= label_tag :nombre, 'Nombre' %>
+<%= text_field_tag :nombre %><br>
+
+<%= label_tag :apellido, 'Apellido' %>
+<%= text_field_tag :apellido %><br>
+
+<%= label_tag :dni, 'DNI' %>
+<%= text_field_tag :dni %><br>
 
 <%= label_tag :proyecto_en_el_que_participa, 'Proyecto en el que participa' %>
 <%= text_field_tag :proyecto_en_el_que_participa %><br>
@@ -7,22 +13,7 @@
 <%= label_tag :tipo_subsidio_solicitado, 'Tipo de subsidio solicitado al INT' %>
 <%= text_field_tag :tipo_subsidio_solicitado %><br>
 <input type="button" value="Agregar" id="agregar_integrante_proyecto_subsidio", class="input-small"> </br>
-<table class="table">
-    <thead>
-      <tr>      
-        <th>Nombre y apellido integrante</th>
-        <th>Proyecto en el que participa</th>    
-        <th>Tipo de subsidio solicitado al INT </th>  
-      </tr>
-    </thead>
-    <tbody>
-      <%  @func_sala.integrantes_participa_proyecto_subsidio.each do |integrante| %>
-        <tr>        
-          <td><%= integrante.nombre_y_apellido %></td>
-          <td><%= integrante.proyecto_en_el_que_participa %></td>    
-          <td><%= integrante.tipo_subsidio_solicitado %></td>    
-          <td><%= link_to 'Eliminar', funcionamiento_sala_v2_integrante_participa_proyecto_subsidio_path(@func_sala, integrante), method: :delete,:remote => true, data: { confirm: '¿Estas seguro?' } %></td>                                  
-        </tr>
-      <% end %>
-    </tbody>
-</table>
+
+<div id="tabla_agregar_y_quitar_integrantes" >
+  <%= render "tabla_integrantes_que_participan_en_otro_proyecto"  %> 
+</div>

@@ -1,25 +1,17 @@
 <%= label_tag :institucion, 'Institución' %>
 <%= text_field_tag :institucion %><br>
 
-<%= label_tag :estado_de_apoyo, 'Estado del apoyo' %>
-<%= text_field_tag :estado_de_apoyo %><br>
-
+<p>Estado del apoyo</p>
+<div id="estado_seleccionado">
+  <% [ 1, 2 ].each do |estado_recibido| %>
+    <%= radio_button_tag :estado_recibido, estado_recibido %>
+    <%= FuncionamientoSalaV2::ESTADO_DEL_APOYO.key(estado_recibido).to_s %>
+  <% end %>
+</div>
+</br>
 <input type="button" value="Agregar" id="agregar_institucion_de_apoyo", class="input-small"> </br>
-<table class="table">
-    <thead>
-      <tr>      
-        <th>Institución</th>
-        <th>Estado del apoyo (solicitado / recibido)</th>   
-        <th></th>   
-      </tr>
-    </thead>
-    <tbody>
-      <%  @func_sala.instituciones_que_dieron_apoyo.each do |institucion| %>
-        <tr>        
-          <td><%= institucion.institucion %></td>
-          <td><%= institucion.estado_de_apoyo %></td>    
-          <td><%= link_to 'Eliminar', funcionamiento_sala_v2_institucion_que_dieron_apoyo_path(@func_sala, institucion), method: :delete,:remote => true, data: { confirm: '¿Estas seguro?' }, id:"eliminar_institucion_apoyo" %></td>                                  
-        </tr>
-      <% end %>
-    </tbody>
-</table>
+<div id="tabla_agregar_y_quitar_institucion" >
+  <%= render "tabla_instituciones_que_dieron_apoyo"  %> 
+</div>
+
+

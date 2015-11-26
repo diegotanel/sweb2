@@ -2,7 +2,7 @@ class CreateInstitucionesQueDieronApoyo < ActiveRecord::Migration
   def change
     create_table :instituciones_que_dieron_apoyo do |t|
       t.string :institucion
-      t.string :estado_de_apoyo
+      t.integer :estado
       t.references :funcionamiento_sala_v2
 
       t.timestamps null: false

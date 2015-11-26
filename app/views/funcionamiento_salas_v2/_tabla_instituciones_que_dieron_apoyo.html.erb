@@ -1,0 +1,18 @@
+<table class="table">
+    <thead>
+      <tr>      
+        <th>Institución </th>
+        <th>Estado del apoyo </th>    
+        <th></th>   
+      </tr>
+    </thead>
+    <tbody>
+      <%  @func_sala.instituciones_que_dieron_apoyo.each do |institucion| %>
+        <tr>        
+          <td><%= institucion.institucion %></td>
+          <td><%= FuncionamientoSalaV2::ESTADO_DEL_APOYO.key(institucion.estado).to_s %></td>     
+          <td><%= link_to 'Eliminar', funcionamiento_sala_v2_institucion_que_dieron_apoyo_path(@func_sala, institucion), method: :delete,:remote => true, data: { confirm: '¿Estas seguro?' }, id:"eliminar_institucion_de_apoyo" %></td>                                  
+        </tr>
+      <% end %>
+    </tbody>
+</table>
