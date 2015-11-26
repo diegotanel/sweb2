@@ -15,32 +15,32 @@ class FuncionamientoSalaV2 < ActiveRecord::Base
  	 VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(?:\.[a-z\d\-]+)*\.[a-z]+\z/i
 
 
- validates :nombre_sala, presence: true, unless: :saltear_validaciones_de_presencia
- #  validates :nombre_sala, length: {maximum: 70}
- #  validates :fecha_inicio_sala, presence: true, unless: :saltear_validaciones_de_presencia
- #  validates :domicilio_sala, presence: true, unless: :saltear_validaciones_de_presencia
- #  validates :domicilio_sala, length: {maximum: 70}
- #  validates :localidad_sala, presence: true, unless: :saltear_validaciones_de_presencia
- #  validates :localidad_sala, length: {maximum: 70}
- #  validates :codigo_postal_sala, presence: true, unless: :saltear_validaciones_de_presencia
- #  validates :codigo_postal_sala, numericality: { only_integer: true }
- #  validates :provincia_sala, presence: true, unless: :saltear_validaciones_de_presencia
- #  validates :provincia_sala, length: {maximum: 70}
- #  validates :nombre_responsable, presence: true, unless: :saltear_validaciones_de_presencia
- #  validates :nombre_responsable, length: {maximum: 70}
- #  validates :apellido_responsable, presence: true, unless: :saltear_validaciones_de_presencia
- #  validates :apellido_responsable, length: {maximum: 70}
- #  validates :num_cuit_responsable, presence: true, unless: :saltear_validaciones_de_presencia
- #  validates :num_cuit_responsable, length: {maximum: 11, minimum: 11}, numericality: { only_integer: true }, uniqueness: { case_sensitive: false }
+  validates :nombre_sala, presence: true, unless: :saltear_validaciones_de_presencia
+  #  validates :nombre_sala, length: {maximum: 70}
+  #  validates :fecha_inicio_sala, presence: true, unless: :saltear_validaciones_de_presencia
+  #  validates :domicilio_sala, presence: true, unless: :saltear_validaciones_de_presencia
+  #  validates :domicilio_sala, length: {maximum: 70}
+  #  validates :localidad_sala, presence: true, unless: :saltear_validaciones_de_presencia
+  #  validates :localidad_sala, length: {maximum: 70}
+  #  validates :codigo_postal_sala, presence: true, unless: :saltear_validaciones_de_presencia
+  #  validates :codigo_postal_sala, numericality: { only_integer: true }
+  #  validates :provincia_sala, presence: true, unless: :saltear_validaciones_de_presencia
+  #  validates :provincia_sala, length: {maximum: 70}
+  #  validates :nombre_responsable, presence: true, unless: :saltear_validaciones_de_presencia
+  #  validates :nombre_responsable, length: {maximum: 70}
+  #  validates :apellido_responsable, presence: true, unless: :saltear_validaciones_de_presencia
+  #  validates :apellido_responsable, length: {maximum: 70}
+  #  validates :num_cuit_responsable, presence: true, unless: :saltear_validaciones_de_presencia
+  #  validates :num_cuit_responsable, length: {maximum: 11, minimum: 11}, numericality: { only_integer: true }, uniqueness: { case_sensitive: false }
   # validates :domicilio_responsable, presence: true, unless: :saltear_validaciones_de_presencia
   # validates :localidad_responsable, presence: true, unless: :saltear_validaciones_de_presencia
   # validates :codigo_postal_responsable, presence: true, unless: :saltear_validaciones_de_presencia
- #  validates :codigo_postal_responsable, numericality: { only_integer: true }
- #  validates :provincia_responsable, presence: true, unless: :saltear_validaciones_de_presencia
- #  validates :email_responsable, presence: true, unless: :saltear_validaciones_de_presencia
- #  validates :email_responsable, format: {with: VALID_EMAIL_REGEX}
- #  validates :telefono_responsable, presence: true, unless: :saltear_validaciones_de_presencia
- #  validates :telefono_responsable, numericality: { only_integer: true }
+  #  validates :codigo_postal_responsable, numericality: { only_integer: true }
+  #  validates :provincia_responsable, presence: true, unless: :saltear_validaciones_de_presencia
+  #  validates :email_responsable, presence: true, unless: :saltear_validaciones_de_presencia
+  #  validates :email_responsable, format: {with: VALID_EMAIL_REGEX}
+  #  validates :telefono_responsable, presence: true, unless: :saltear_validaciones_de_presencia
+  #  validates :telefono_responsable, numericality: { only_integer: true }
 
   validates :fecha_inicio_periodo_de_subsidio, :presence => true, unless: :saltear_validaciones_de_presencia
   #validates :solicitud_de_subsidio_por_primera_vez, :presence => true
