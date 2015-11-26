@@ -57,9 +57,9 @@
 
 <table class="table table-striped">
   <tr>
-    <th>Número de formulario</th>
+    <th>Número de trámite</th>
     <th>Tipo de solicitud</th>
-    <th></th>
+    <th>Estado</th>
     <th></th>
     <th></th>
   </tr>
@@ -68,7 +68,13 @@
 
     <td><%= func_sala.id %></td>
     <td><%= FuncionamientoSalaV2::ESTADOS.key(func_sala.estado)%></td>
-     <td><%= link_to "ver", funcionamiento_sala_v2_path(func_sala) %></td>
+    <% unless (func_sala.valid?) %>
+      <td><font color="red">Campo Incompleto</font></td>
+    <% end %>
+    <% if func_sala.valid? %>
+      <td><font color="green">Campo Completo</font></td>
+    <% end %>
+    <td><%= link_to "Ver", funcionamiento_sala_v2_path(func_sala) %></td>
     <td><%= link_to "Editar", edit_funcionamiento_sala_v2_path(func_sala) %></td>
     <td><%= link_to "Enviar", enviar_funcionamiento_sala_v2_path(func_sala) %></td>
     <td><%= link_to 'Cancelar', func_sala, method: :delete, data: { confirm: '¿Estas seguro?' } %></td>
@@ -80,7 +86,7 @@
 
 <table class="table table-striped">
   <tr>
-    <th>Número de formulario</th>
+    <th>Número de trámite</th>
     <th>Tipo de solicitud</th>
   </tr>
 
