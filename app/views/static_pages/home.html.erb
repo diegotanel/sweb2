@@ -92,7 +92,7 @@
 
   <%= content_tag_for(:tr, @func_sala_v2_enviados) do |func_sala| %>
   <% if func_sala.estado == 1 %>
-	    <td><%= func_sala.id %></td>
+	    <td><%= func_sala.num_tramite %></td>
 	    <td><%= FuncionamientoSalaV2::ESTADOS.key(func_sala.estado)%></td>
    <% end %>
   <% end %>

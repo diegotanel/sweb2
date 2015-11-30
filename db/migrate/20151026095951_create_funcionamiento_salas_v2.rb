@@ -30,6 +30,7 @@ class CreateFuncionamientoSalasV2 < ActiveRecord::Migration
       t.string :telefono_responsable
       t.string :monto_letra
       t.string :monto_numero
+      t.integer :num_tramite
     	t.integer :estado
 
       t.timestamps null: false
