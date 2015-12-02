@@ -118,7 +118,15 @@ class FuncionamientoSalasV2Controller < ApplicationController
     @func_sala = FuncionamientoSalaV2.find(params[:id])
     @func_sala.saltear_validaciones_de_presencia = true
     @func_sala.estado = FuncionamientoSalaV2::ESTADOS[:enviado]
-    @func_sala.save
+    @func_sala.created_at = Time.now
+    @func_sala.updated_at = Time.now
+    @ultimo_func = FuncionamientoSalaV2.find_by_estado(1)
+    if @ultimo_func.nil?
+      @func_sala.num_tramite = 1
+    else
+      @func_sala.num_tramite = @ultimo_func.num_tramite + 1
+    end
+    @func_sala.save!
     flash[:success] = "Solicitud enviada"
     redirect_to root_path
   end

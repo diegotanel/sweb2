@@ -127,6 +127,7 @@ ActiveRecord::Schema.define(version: 20151116184127) do
     t.string   "telefono_responsable"
     t.string   "monto_letra"
     t.string   "monto_numero"
+    t.integer  "num_tramite"
     t.integer  "estado"
     t.datetime "created_at",                                               null: false
     t.datetime "updated_at",                                               null: false
