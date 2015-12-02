@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resources :funcionamiento_salas_v2 do
     member do
       get :enviar
+      post :enviado
       post :pegar_form_datos_integrantes_que_participan_en_otro_proyecto
       post :pegar_form_datos_instituciones_que_dieron_apoyo
       post :agregar_integrante_proyecto_subsidio

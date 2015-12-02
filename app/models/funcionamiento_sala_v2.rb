@@ -15,7 +15,6 @@ class FuncionamientoSalaV2 < ActiveRecord::Base
 	#before_save { self.email = email.downcase }
  	 VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(?:\.[a-z\d\-]+)*\.[a-z]+\z/i
 
-
   # validates :nombre_sala, presence: true, unless: :saltear_validaciones_de_presencia
   #  validates :nombre_sala, length: {maximum: 70}
   #  validates :fecha_inicio_sala, presence: true, unless: :saltear_validaciones_de_presencia

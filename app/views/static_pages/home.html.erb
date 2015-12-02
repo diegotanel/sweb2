@@ -38,7 +38,13 @@
   <ul class="dropdown-menu" role="menu">
     <li><%= link_to "Subsidio para Asistencia Técnica para Sala o Espacio de Teatro Independiente", root_path %></li>    
     <li><%= link_to "Subsidio para Adecuación de Sala o Espacio de Teatro Independiente para Habilitación", root_path %></li>
-    <li><%= link_to "Subsidio para Funcionamiento de Sala o Espacio de Teatro Independiente", new_funcionamiento_sala_v2_path %></li>             
+    <li class="menu-item dropdown dropdown-submenu">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Subsidio para Funcionamiento de Sala o Espacio de Teatro Independiente</a>
+        <ul class="dropdown-menu">
+            <li><%= link_to "Nuevo", new_funcionamiento_sala_v2_path %></li>  
+            <li><%= link_to "Opción 2", root_path %></li>                      
+        </ul>
+    </li>   
   </ul>
 </li>
 

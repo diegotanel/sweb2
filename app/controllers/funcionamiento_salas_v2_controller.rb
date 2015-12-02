@@ -1,6 +1,6 @@
 class FuncionamientoSalasV2Controller < ApplicationController
   #before_action :signed_in_user, only: [:new, :show, :create, :index, :edit, :update, :enviar]
-  before_action :incializar_variables_registro, only: [:show]
+  before_action :incializar_variables_registro, only: [:show, :enviar]
 
   def new
     @func_sala = FuncionamientoSalaV2.new
@@ -104,6 +104,17 @@ class FuncionamientoSalasV2Controller < ApplicationController
   end
 
   def enviar
+    # @func_sala = FuncionamientoSalaV2.find(params[:id])
+    # @func_sala.saltear_validaciones_de_presencia = true
+    # @func_sala.estado = FuncionamientoSalaV2::ESTADOS[:enviado]
+    # @func_sala.save
+    # flash[:success] = "Solicitud enviada"
+    # redirect_to root_path
+    @func_sala = FuncionamientoSalaV2.find(params[:id])
+    cargar_datos_func_sala_dummy(@datos_responsable, @datos_sala, @datos_integrante)
+  end
+
+  def enviado
     @func_sala = FuncionamientoSalaV2.find(params[:id])
     @func_sala.saltear_validaciones_de_presencia = true
     @func_sala.estado = FuncionamientoSalaV2::ESTADOS[:enviado]
