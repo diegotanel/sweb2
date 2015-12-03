@@ -41,7 +41,7 @@
     <li class="menu-item dropdown dropdown-submenu">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Subsidio para Funcionamiento de Sala o Espacio de Teatro Independiente</a>
         <ul class="dropdown-menu">
-            <li><%= link_to "LA SALITA DE MARTIN ", new_funcionamiento_sala_v2_path %></li>  
+            <li><%= link_to "LA SALITA DE MARTIN", new_funcionamiento_sala_v2_path %></li>  
             <li><%= link_to "GONZALO Y SUS SOBRINOS", root_path %></li>                      
         </ul>
     </li>   
@@ -64,7 +64,10 @@
 <table class="table table-striped">
   <tr>
     <th>Número de borrador</th>
-    <th>Tipo de solicitud</th>
+    <th>Registro</th>
+    <th>Subsidio o Beca</th>
+    <th>Denominación</th>
+    <th>Versión</th>
     <th>Estado</th>
     <th></th>
     <th></th>
@@ -75,7 +78,10 @@
   <%= content_tag_for(:tr, @func_sala_v2_borradores) do |func_sala| %>
 
     <td><%= func_sala.id %></td>
-    <td><%= FuncionamientoSalaV2::ESTADOS.key(func_sala.estado)%></td>
+    <td>SALAS O ESPACIOS DE TEATRO INDEPENDIENTE</td>
+    <td>Subsidio para Funcionamiento de Sala o Espacio de Teatro Independiente</td>
+    <td>LA SALITA DE MARTIN</td>
+    <td>2.0</td>
     <% unless (func_sala.valid?) %>
       <td><font color="red">Campo Incompleto</font></td>
     <% end %>
@@ -95,13 +101,19 @@
 <table class="table table-striped">
   <tr>
     <th>Número de trámite</th>
-    <th>Tipo de solicitud</th>
+    <th>Registro</th>
+    <th>Subsidio o Beca</th>
+    <th>Denominación</th>
+    <th>Versión</th>
   </tr>
 
   <%= content_tag_for(:tr, @func_sala_v2_enviados) do |func_sala| %>
   <% if func_sala.estado == 1 %>
 	    <td><%= func_sala.num_tramite %></td>
-	    <td><%= FuncionamientoSalaV2::ESTADOS.key(func_sala.estado)%></td>
+      <td>SALAS O ESPACIOS DE TEATRO INDEPENDIENTE</td>
+      <td>Subsidio para Funcionamiento de Sala o Espacio de Teatro Independiente</td>
+      <td>LA SALITA DE MARTIN</td>
+      <td>2.0</td>
    <% end %>
   <% end %>
    
