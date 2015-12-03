@@ -105,6 +105,7 @@
     <th>Subsidio o Beca</th>
     <th>Denominación</th>
     <th>Versión</th>
+    <th>Ver</th>
   </tr>
 
   <%= content_tag_for(:tr, @func_sala_v2_enviados) do |func_sala| %>
@@ -114,6 +115,7 @@
       <td>Subsidio para Funcionamiento de Sala o Espacio de Teatro Independiente</td>
       <td>LA SALITA DE MARTIN</td>
       <td>2.0</td>
+      <td><%= link_to "Ver",  show_enviados_funcionamiento_sala_v2_path(func_sala) %></td>
    <% end %>
   <% end %>
    

@@ -1,6 +1,6 @@
 class FuncionamientoSalasV2Controller < ApplicationController
   #before_action :signed_in_user, only: [:new, :show, :create, :index, :edit, :update, :enviar]
-  before_action :incializar_variables_registro, only: [:show, :enviar]
+  before_action :incializar_variables_registro, only: [:show, :enviar, :show_enviados]
 
   def new
     @func_sala = FuncionamientoSalaV2.new
@@ -96,7 +96,7 @@ class FuncionamientoSalasV2Controller < ApplicationController
   def destroy
     if FuncionamientoSalaV2.find(params[:id]).destroy
       flash[:success] = "Solicitud eliminada"
-      redirect_to funcionamiento_salas_path
+      redirect_to root_path
     else
       flash.now[:failure] = "La solicitud no puede ser eliminada"
       render 'index'
@@ -129,6 +129,11 @@ class FuncionamientoSalasV2Controller < ApplicationController
     @func_sala.save!
     flash[:success] = "Solicitud enviada"
     redirect_to root_path
+  end
+
+  def show_enviados
+    @func_sala = FuncionamientoSalaV2.find(params[:id])
+    cargar_datos_func_sala_dummy(@datos_responsable, @datos_sala, @datos_integrante)
   end
 
 

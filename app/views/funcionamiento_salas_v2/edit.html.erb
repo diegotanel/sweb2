@@ -15,7 +15,8 @@
       </br>
 
       <%= f.label :fecha_de_inicio_del_periodo_por_el_que_solicita_subsidio, "Fecha de inicio del período por el que solicita subsidio (DD/MM/AAAA)" %>
-      <%= f.text_field :fecha_de_inicio_del_periodo_por_el_que_solicita_subsidio %>
+      <%= f.text_field :fecha_de_inicio_del_periodo_por_el_que_solicita_subsidio, :value => @func_sala.try(:fecha_de_inicio_del_periodo_por_el_que_solicita_subsidio).try(:strftime, "%d/%m/%Y") %>
+
 
       <p>¿Solicita subsidio por primera vez?</p>
       <div>
