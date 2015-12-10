@@ -255,13 +255,13 @@ class FuncionamientoSalasV2Controller < ApplicationController
   end
 
   def cargar_datos_func_sala_dummy(datos_responsable, datos_sala, datos_integrante)
-    @datos_responsable = datos_responsable.new('Gonzalo', 'Santander', '20288034363', 'Pampa 223',
-                                               'C.A.B.A. loc', 'C.A.B.A. prov', '1414', 'gsan@prueba.com', '45554555' )
-    @datos_sala = datos_sala.new('LA SALITA DE MARTIN', Date.new(2007, 10, 29), 'Aguirre 563', '1673', 'Obera', 'Misiones')
+    @datos_responsable = datos_responsable.new('Diego', 'Lopez Dominguez', '20299050883', 'LAVALLE 3279 DPTO 6',
+                                               'Capital Federal', 'CIUDAD DE BUENOS AIRES', '1414', 'diegolopezdiego@hotmail.com', '48671282' )
+    @datos_sala = datos_sala.new('LA SALITA DE MARTIN', Date.new(2007, 10, 29), 'Aguirre 563', '1673', 'Oberá', 'Misiones')
     @datos_integrantes = []
-    @datos_integrantes << datos_integrante.new('Borgese', 'Roberto', '20342526', Date.new(1980, 10, 29), 'Apolinario Figuero 123', 
+    @datos_integrantes << datos_integrante.new('Vega', 'Jorge Hernan', '20112863584', Date.new(1980, 10, 29), 'Apolinario Figuero 123', 
       'rborgese@gmail.com', '42554244', 'Electricista')
-    @datos_integrantes << datos_integrante.new('Aguirre', 'Ivan', '30234114', Date.new(1984, 9, 10), 'Soldado de la independencia 1311', 
+    @datos_integrantes << datos_integrante.new('Aguirre', 'Ivan', '20330234114', Date.new(1984, 9, 10), 'Soldado de la independencia 1311', 
       'iaguirre@gmail.com', '42335552', 'Gasista')
   end
 

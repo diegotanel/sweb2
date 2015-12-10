@@ -65,8 +65,8 @@
   <tr>
     <th>Número de borrador</th>
     <th>Registro</th>
-    <th>Subsidio o Beca</th>
     <th>Denominación</th>
+    <th>Tipo de solicitud</th>
     <th>Versión</th>
     <th>Estado</th>
     <th></th>
@@ -79,8 +79,8 @@
 
     <td><%= func_sala.id %></td>
     <td>SALAS O ESPACIOS DE TEATRO INDEPENDIENTE</td>
-    <td>Subsidio para Funcionamiento de Sala o Espacio de Teatro Independiente</td>
     <td>LA SALITA DE MARTIN</td>
+    <td>Subsidio para Funcionamiento de Sala o Espacio de Teatro Independiente</td>
     <td>2.0</td>
     <% unless (func_sala.valid?) %>
       <td><font color="red">Campo Incompleto</font></td>
@@ -102,8 +102,8 @@
   <tr>
     <th>Número de trámite</th>
     <th>Registro</th>
-    <th>Subsidio o Beca</th>
     <th>Denominación</th>
+    <th>Tipo de solicitud</th>
     <th>Versión</th>
     <th>Ver</th>
   </tr>
@@ -112,8 +112,8 @@
   <% if func_sala.estado == 1 %>
 	    <td><%= func_sala.num_tramite %></td>
       <td>SALAS O ESPACIOS DE TEATRO INDEPENDIENTE</td>
-      <td>Subsidio para Funcionamiento de Sala o Espacio de Teatro Independiente</td>
       <td>LA SALITA DE MARTIN</td>
+      <td>Subsidio para Funcionamiento de Sala o Espacio de Teatro Independiente</td>
       <td>2.0</td>
       <td><%= link_to "Ver",  show_enviados_funcionamiento_sala_v2_path(func_sala) %></td>
    <% end %>

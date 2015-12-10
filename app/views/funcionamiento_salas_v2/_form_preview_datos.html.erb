@@ -33,7 +33,7 @@
 
   </br>
 
-  <p>¿Solicita subsidio por primera vez?</p>
+  <h4>¿Solicita subsidio por primera vez?</h4>
   <div>
     <% @solicitud = @func_sala.try(:solicitud_de_subsidio_por_primera_vez) %>
     <% [ 'true', 'false' ].each do |solicitud| %>
@@ -74,7 +74,7 @@
   <% end %> 
   </br>
 
-  <p>¿Algún integrante participa en otro proyecto que haya solicitado subsidio al INT en el periodo que se solicita subsidio?</p>
+  <h4>¿Algún integrante participa en otro proyecto que haya solicitado subsidio al INT en el periodo que se solicita subsidio?</h4>
          
        <div>
         <% @participa = @func_sala.try(:algun_integrante_participa) %>
@@ -113,7 +113,7 @@
       </table>
       <% end %> 
   </br>
-  <p>¿La Sala, solicitó y/o recibió otro apoyo institucional para este funcionamiento?</p>
+  <h4>¿La Sala, solicitó y/o recibió otro apoyo institucional para este funcionamiento?</h4>
 
       <div>
         <% @solicito = @func_sala.try(:solicito_apoyo) %> 
@@ -132,14 +132,14 @@
           <thead>
             <tr>      
               <th>Institución</th>
-              <th>Estado del apoyo (solicitado / recibido)</th>   
+              <th>Estado del apoyo</th>   
             </tr>
           </thead>
           <tbody>
             <%  @func_sala.instituciones_que_dieron_apoyo.each do |institucion| %>
               <tr>        
                 <td><%= institucion.institucion %></td>
-                <td><%= institucion.estado %></td>                             
+                <td><%= FuncionamientoSalaV2::ESTADO_DEL_APOYO.key(institucion.estado).to_s %></td>                             
               </tr>
             <% end %>
           </tbody>
@@ -147,17 +147,18 @@
       <% end %> 
 </br>
 
+<h4>Plan a desarrollar </h4>
 <p>
-  <b>Descripción del proyecto previsto y objetivos principales:</b>
+  <b>Descripción del proyecto previsto y objetivos principales:</b></br>
   <%= @func_sala.descripcion_proyecto %>
 </p>
 
 <p>
-  <b>Descripción de las estrategias:</b>
+  <b>Descripción de las estrategias previstas para ejecutar el proyecto independientemente del eventual apoyo del INT (recupero por venta de entradas, publicidad, comunicación, otros recursos previstos):</b></br>
   <%= @func_sala.descripcion_estrategias %>
 </p>
 </br>
-<p>Detalle del plan de gastos total del funcionamiento (discriminado por rubros):</p>
+<p> <b>Detalle del plan de gastos total del funcionamiento (discriminado por rubros):</b></p>
 
 <div id="tabla_registro_de_pagos"> 
         <% if !@func_sala.registros_plan_de_gasto_de_funcionamiento_de_sala.nil? && @func_sala.registros_plan_de_gasto_de_funcionamiento_de_sala.length > 0 %>
@@ -189,6 +190,7 @@
 </br>
 
 
+<h4>Integrantes de la Sala o Espacio Teatral</h4>
    <table class="table table-bordered">
         <thead>
           <tr>      
@@ -216,6 +218,9 @@
 
         </tbody>
      </table>
+
+</br>
+<h4>Monto solicitado al Instituto Nacional del Teatro</h4>
 
 <p>
   <b>Monto solicitado (en letras):</b>
